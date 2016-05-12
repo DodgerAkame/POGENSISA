@@ -3,7 +3,7 @@
 <%@ page import="com.google.appengine.api.datastore.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
-<%@ page import="guestbookobjectify.Message" %>
+<%@ page import="guestbookobjectify.Message"%>
 
 <!DOCTYPE html>
 
@@ -14,33 +14,62 @@
 </head>
 
 <body>
-	<h1>Vous avez aimé mon site ? Dites-le !</h1>
 	<form method="post" action="" onSubmit="window.location.reload()">
+		<h2>Checkboxes</h2>
 		<p>
-			<label>Votre nom : <input type="text" name="name" /></label>
+			<label>Option 1 <input type="checkbox" name="option"
+				value="Option 1"></label>
 		</p>
 		<p>
-			<label>Votre message : <textarea name="message"
-					style="width: 200px; height: 100px;"></textarea></label>
+			<label>Option 2 <input type="checkbox" name="option"
+				value="Option 2"></label>
+		</p>
+		<p>
+			<label>Option 3 <input type="checkbox" name="option"
+				value="Option 3"></label>
+		</p>
+		<p>
+			<label>Option 4 <input type="checkbox" name="option"
+				value="Option 4"></label>
+		</p>
+		<h2>Radio Buttons</h2>
+		<p>
+			<label>Bouton 1<input type="radio" name="button" checked
+				value="Bouton 1" /></label>
+		</p>
+		<p>
+			<label>Bouton 2<input type="radio" name="button"
+				value="Bouton 2" /></label>
 		</p>
 		<p>
 			<input type="submit" />
 		</p>
 	</form>
+	
+	<br>
+	<br>
 
-	<h1>Ils ont aimé :</h1>
-	<p>
-		<em>(et c'est stocké dans le Datastore !)</em>
-	</p>
+	<h1>Résultats:</h1>
 	<%
 		List<Message> messages = (List<Message>) request.getAttribute("messages");
 		for (Message message : messages) {
 	%>
 	<p>
-		<strong><%=message.getName()%></strong> a écrit :
+		<%-- 		<strong><%=message.getName()%></strong> a écrit : --%>
 
-		<%=message.getMessage()%>
+		<%-- 		<%=message.getMessage()%> --%>
+		<strong>Options cochées</strong>
+		<%
+			for (int i = 0; i < message.getCheckboxes().size(); i++) {
+		%>
+	
+	<p>
+		<%=message.getCheckboxes().get(i)%>
 	</p>
+	<%
+		}
+	%>
+	<%=message.isCheck()%>
 	<%
 		}
 	%>

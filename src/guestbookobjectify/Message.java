@@ -1,6 +1,12 @@
 package guestbookobjectify;
 
-import com.googlecode.objectify.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Unindex;
 
 @Entity
 @Index
@@ -10,9 +16,19 @@ public class Message {
 	@Unindex
 	private String name;
 	private String message;
+	private String check;
+	private List<String> checkboxes = new ArrayList<String>();
 
 	public Message() {
 
+	}
+
+	public List<String> getCheckboxes() {
+		return checkboxes;
+	}
+
+	public void setCheckboxes(List<String> checkboxes) {
+		this.checkboxes = checkboxes;
 	}
 
 	public Message(String name, String message) {
@@ -20,11 +36,11 @@ public class Message {
 		this.message = message;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -42,6 +58,14 @@ public class Message {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String isCheck() {
+		return check;
+	}
+
+	public void setCheck(String check) {
+		this.check = check;
 	}
 
 }

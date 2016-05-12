@@ -3,6 +3,7 @@ package guestbookobjectify;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,8 +34,16 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 		try {
 			String name = req.getParameter("name");
 			String msg = req.getParameter("message");
+			String[] checked = req.getParameterValues("option");
+			String bouton = req.getParameter("button");
+			List<String> checkboxes = new ArrayList<String>();
 
 			Message message = new Message(name, msg);
+			for (int i = 0; i < checked.length; i++) {
+				checkboxes.add(checked[i]);
+			}
+			message.setCheckboxes(checkboxes);
+			message.setCheck(bouton);
 
 			ofy().save().entity(message).now();
 
