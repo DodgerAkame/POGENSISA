@@ -16,13 +16,13 @@ import com.googlecode.objectify.ObjectifyService;
 public class GuestbookObjectifyServlet extends HttpServlet {
 
 	static {
-		ObjectifyService.register(Message.class);
+		ObjectifyService.register(Formulaire.class);
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
-			List<Message> message = ofy().load().type(Message.class).list();
-			req.setAttribute("messages", message);
+			List<Formulaire> form = ofy().load().type(Formulaire.class).list();
+			req.setAttribute("formulaire", form);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/guestbook.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -32,11 +32,9 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			String name = req.getParameter("name");
-			String msg = req.getParameter("message");
+			Formulaire form = new Formulaire(name);
 
-			Message message = new Message(name, msg);
-
-			ofy().save().entity(message).now();
+			ofy().save().entity(form).now();
 
 			resp.sendRedirect("/");
 		} catch (IOException e) {
