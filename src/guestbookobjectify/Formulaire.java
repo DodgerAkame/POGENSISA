@@ -32,5 +32,9 @@ public class Formulaire {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String create_title(String name){
+		String S = "<h1> "+name+"</h1>";
+		return S;
+	}
 
 }

@@ -13,18 +13,14 @@
 <meta charset="utf-8" />
 </head>
 
-<body>
+<body><% String name; %>
 	<h1>Vous avez aimé mon site ? Dites-le !</h1>
-	<% 
-	Formulaire form = new Formulaire();
-	if(form.getName() == " haha")
-		%>
-		<% { %>
-		<h2> <%= form.getName() %> est dans la base de donnée</h2>
-		<% } %>
+	
 	<form method="post" action="" onSubmit="window.location.reload()">
 		<p>
 			<label>Votre nom : <input type="text" name="name" /></label>
+			<% Formulaire form = new Formulaire(); %>
+			<%= form.create_title("name") %>
 		</p>
 		<p>
 			<input type="submit" />
