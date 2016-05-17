@@ -3,7 +3,7 @@
 <%@ page import="com.google.appengine.api.datastore.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
-<%@ page import="guestbookobjectify.*"%>
+<%@ page import="guestbookobjectify.Message"%>
 
 <!DOCTYPE html>
 
@@ -16,15 +16,8 @@
 <body>
 	<form method="post" action="" onSubmit="window.location.reload()">
 		<p>
-			<label><h1>Titre du formulaire</h1>
-				<input type="text" name="nameform" /></label>
+			<label><input type="number" name="number" /></label>
 		</p>
-
-		<p>
-			<label>Combien de questions ?<input type="number"
-				name="nbquestion" /></label>
-		</p>
-
 		<p>
 			<input type="submit" />
 		</p>
@@ -32,6 +25,17 @@
 
 	<br>
 	<br>
+
+	<%
+	
+	%>
+
+	<p>Coucou toi</p>
+	<br>
+
+	<%
+		
+	%>
 
 </body>
 </html>

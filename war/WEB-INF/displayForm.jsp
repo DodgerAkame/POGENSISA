@@ -13,25 +13,19 @@
 <meta charset="utf-8" />
 </head>
 
-<body>
-	<form method="post" action="" onSubmit="window.location.reload()">
+<%
+	List<Form> forms = (List<Form>) request.getAttribute("form");
+	for (Form form : forms) {
+		for (int i = 0; i < form.getNbquestions(); i++) {
+%>
 		<p>
-			<label><h1>Titre du formulaire</h1>
-				<input type="text" name="nameform" /></label>
+			<label>Option <%=i%><input type="checkbox" name="option"
+				value="Option<%=i%>"></label>
 		</p>
-
-		<p>
-			<label>Combien de questions ?<input type="number"
-				name="nbquestion" /></label>
-		</p>
-
-		<p>
-			<input type="submit" />
-		</p>
-	</form>
-
-	<br>
-	<br>
+<%
+	}
+	}
+%>
 
 </body>
 </html>
