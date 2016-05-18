@@ -60,17 +60,18 @@
 	<label><input type="text" name="reponse <%=0%>" /></label><br> <label><input
 		type="text" name="reponse <%=1%>" /></label><br>
 	<div id="extra<%=i%>"></div>
-	<label><input type="button" onclick="addField();"
+	<label><input type="button" onclick="addField(<%=i%>);"
 		value="Ajouter une réponse" /></label>
 </div>
 
 <script type="text/javascript">
-	function addField() {
+	function addField(i) {
+		var num = parseInt(i);
 		var extra = document.createElement('span');
 		extra.innerHTML = '<input type "text" name="reponse "><br>';
 
-	document.getElementById('extra').appendChild(extra);
-	<%j++;%>
+		document.getElementById('extra' + num).appendChild(extra);
+<%j++;%>
 	}
 </script>
 
