@@ -59,17 +59,18 @@
 	%>
 	<label><input type="text" name="reponse <%=0%>" /></label><br> <label><input
 		type="text" name="reponse <%=1%>" /></label><br>
-	<div id="extra"></div>
-	<label><input type="button"
-		onclick="addField();" value="Ajouter une réponse" /></label>
+	<div id="extra<%=i%>"></div>
+	<label><input type="button" onclick="addField();"
+		value="Ajouter une réponse" /></label>
 </div>
 
 <script type="text/javascript">
 	function addField() {
 		var extra = document.createElement('span');
-		extra.innerHTML = '<input type "text" name="reponse " id="extra"><br>';
-<%j++;%>
+		extra.innerHTML = '<input type "text" name="reponse "><br>';
+
 	document.getElementById('extra').appendChild(extra);
+	<%j++;%>
 	}
 </script>
 
