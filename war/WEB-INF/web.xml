@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+
 	<servlet>
 		<servlet-name>GuestbookObjectify</servlet-name>
 		<servlet-class>guestbookobjectify.GuestbookObjectifyServlet</servlet-class>
@@ -12,9 +13,21 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>GuestbookObjectify</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FormCreator</servlet-name>
+		<servlet-class>guestbookobjectify.FormCreatorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FormCreator</servlet-name>
+		<url-pattern>/formcreator</url-pattern>
+	</servlet-mapping>
+	
+
 	<welcome-file-list>
 		<welcome-file>guestbook.jsp</welcome-file>
 	</welcome-file-list>
+
 	<filter>
 		<filter-name>ObjectifyFilter</filter-name>
 		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
@@ -23,4 +36,5 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<filter-name>ObjectifyFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 </web-app>

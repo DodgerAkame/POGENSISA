@@ -18,6 +18,7 @@ public class Form {
 	private int nbquestions = 0;
 	private Map<String, Question> liste = new HashMap<String, Question>();
 	private String name;
+	private Key<Form> key;
 	
 	private Form(){
 		
@@ -73,7 +74,14 @@ public class Form {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public Key<Form> getKey() {
+		return key;
+	}
+
+	public void setKey(Key<Form> key) {
+		this.key = key;
+	}
+
 
 }

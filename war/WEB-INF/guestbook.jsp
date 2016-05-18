@@ -25,9 +25,9 @@
 				name="nbquestion" /></label>
 		</p>
 
-		<p>
-			<input type="submit" />
-		</p>
+		<a href="/formcreator">
+			<input type="submit"/>
+		</a>
 	</form>
 
 	<br>

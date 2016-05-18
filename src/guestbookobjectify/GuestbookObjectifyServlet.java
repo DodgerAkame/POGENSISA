@@ -67,7 +67,7 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 
 			ofy().save().entity(form).now();
 
-			resp.sendRedirect("/displayForm.jsp");
+			resp.sendRedirect("/formcreator");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
