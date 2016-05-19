@@ -21,6 +21,7 @@
 
 <%
 	List<Form> forms = (List<Form>) request.getAttribute("form");
+	int nb = 0;
 	for (Form form : forms) {
 		Map<String, Question> buffer = new HashMap<String, Question>();
 %>
@@ -31,54 +32,75 @@
 </h1>
 
 
-<%
-	for (int i = 0; i < form.getNbquestions(); i++) {
-%>
+<div id="question"></div>
 
 
-<h2>
-	<label>Enoncé de la question :<input type="text"
-		name="titreQuestion" value="titreQuestion<%=i%>" /></label>
-</h2>
+<div id="pattern" style="display: none">
+	<div id="questiongen">
+		<h2>
+			<label>Enoncé de la question :<input type="text"
+				name="titreQuestion" value="titreQuestion<%=nb%>" /></label>
+		</h2>
 
 
-<div>
-	<p>Type de réponse</p>
-	<label>Checkbox<input type="radio" name="typeQuestion"
-		value="checkbox"></label> <br> <label>Bouton Radio<input
-		type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
-		de Texte<input type="radio" name="typeQuestion" value="text_area">
-	</label>
+		<div>
+			<p>Type de réponse</p>
+			<label>Checkbox<input type="radio" name="typeQuestion"
+				value="checkbox"></label> <br> <label>Bouton Radio<input
+				type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
+				de Texte<input type="radio" name="typeQuestion" value="text_area">
+			</label>
+		</div>
+
+
+		<div>
+			<p>Réponses</p>
+
+			<label><input type="text" name="reponse <%=0%>" /></label><br>
+			<label><input type="text" name="reponse <%=1%>" /></label><br>
+			<div id="extra<%=nb%>"></div>
+			<label><input type="button" onclick="addField(<%=nb%>);"
+				value="Ajouter une réponse" /></label>
+		</div>
+
+		<%
+			}
+		%>
+	</div>
 </div>
 
 
-<div>
-	<p>Réponses</p>
-	<%
-		int j = 2;
-	%>
-	<label><input type="text" name="reponse <%=0%>" /></label><br> <label><input
-		type="text" name="reponse <%=1%>" /></label><br>
-	<div id="extra<%=i%>"></div>
-	<label><input type="button" onclick="addField(<%=i%>);"
-		value="Ajouter une réponse" /></label>
-</div>
+<label><input type="button" value="Ajouter question"
+	onclick="addQuestion();" /></label>
 
 <script type="text/javascript">
+	var lol = document.getElementById('questiongen');
+	var mdr = <%=nb%>;
+	
+	
 	function addField(i) {
 		var num = parseInt(i);
 		var extra = document.createElement('span');
 		extra.innerHTML = '<input type "text" name="reponse "><br>';
-
+	
 		document.getElementById('extra' + num).appendChild(extra);
-<%j++;%>
+	
 	}
+	
+	function addQuestion(){
+		//var question = document.getElementById('questiongen');
+		var ptdr = document.getElementById('question');
+		ptdr.innerHTML = lol.innerHTML;
+		ptdr.id = 'questiongen' + mdr;
+		alert(ptdr.innerHTML);
+		
+		document.getElementby('question').appendChild(ptdr);
+		
+		<%=nb++%>
+	}
+	
+	
 </script>
-
-<%
-	}
-	}
-%>
 
 </body>
 </html>

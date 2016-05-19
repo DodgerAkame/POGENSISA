@@ -31,7 +31,6 @@ public class FormCreatorServlet extends HttpServlet {
 			}
 			
 			req.setAttribute("form", forms);
-			req.setAttribute("question", questions);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/displayForm.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block

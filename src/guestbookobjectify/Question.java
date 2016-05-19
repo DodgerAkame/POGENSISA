@@ -30,7 +30,7 @@ public class Question {
 		this.enonce = enonce;
 		this.nbreponses = nbreponses;
 		this.parent = parent;
-		
+
 		switch (questionType) {
 		case "checkbox":
 			this.question = QuestionType.CHECKBOX;
@@ -47,8 +47,8 @@ public class Question {
 		}
 
 	}
-	
-	public void addReponse(String reponse){
+
+	public void addReponse(String reponse) {
 		Key<Question> question = Key.create(Question.class, id);
 		reponses.add(new Reponse(reponse, question));
 	}
@@ -64,13 +64,21 @@ public class Question {
 	public String getEnonce() {
 		return enonce;
 	}
-
+	
 	public void setEnonce(String enonce) {
 		this.enonce = enonce;
 	}
 
-	public QuestionType getQuestion() {
-		return question;
+	public String getQuestion() {
+		String S = "";
+		if (question == QuestionType.CHECKBOX) {
+			S = "checkbox";
+		} else if (question == QuestionType.RADIO_BUTTON) {
+			S = "radio";
+		} else if (question == QuestionType.TEXT_AREA) {
+			S = "text";
+		}
+		return S;
 	}
 
 	public void setQuestion(QuestionType question) {
@@ -92,7 +100,6 @@ public class Question {
 	public void setReponses(List<Reponse> reponses) {
 		this.reponses = reponses;
 	}
-
 	
 	
 }

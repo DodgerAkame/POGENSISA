@@ -82,6 +82,10 @@ public class Form {
 	public void setKey(Key<Form> key) {
 		this.key = key;
 	}
+	
+	public void incr(){
+		nbquestions++;
+	}
 
 
 }
