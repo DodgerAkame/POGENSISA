@@ -20,6 +20,10 @@
 				<input type="text" name="nameform" /></label>
 		</p>
 
+		<p>
+			<label>Combien de questions ?<input type="number"
+				name="nbquestion" /></label>
+		</p>
 
 		<a href="/formcreator">
 			<input type="submit"/>
