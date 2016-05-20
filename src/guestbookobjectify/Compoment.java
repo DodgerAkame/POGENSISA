@@ -11,10 +11,11 @@ public class Compoment {
 	
 	
 	public String Panel(Form key){
-		String S = "<h1>il n'y a pas de question</h1>";
+		Form form = key;
+		String S = "<h1>"+form.getName()+"</h1>";
 		String C = "";
 		String T = "Formulaire";
-		Form form = key;
+		
 		Map<String,Question> question = form.getListe();
 		for (Entry<String, Question> e : question.entrySet()){
 			Question q = e.getValue();
@@ -45,6 +46,7 @@ public class Compoment {
 			}
 			S = S+"<form class=\"form-horizontal\">"+"\n"+
 					"<fieldset>"+"\n"+"<!-- Form Name -->"+"\n"+"<legend>"+T+"</legend>"+C+"</fieldset>"+"\n"+"</form>";
+			C = "";
 			System.out.println("hhee");					
 		}
 		return S;

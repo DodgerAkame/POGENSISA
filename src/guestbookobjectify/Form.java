@@ -17,8 +17,7 @@ public class Form {
 	@Unindex
 	private int nbquestions = 0;
 	private Map<String, Question> liste = new HashMap<String, Question>();
-	private String name;
-	private Key<Form> key;
+	private String name = "";
 	
 	private Form(){
 		
@@ -30,7 +29,7 @@ public class Form {
 	
 	public void addQuestion(String enonce, String questionType, String nbreponses) {
 		Key<Form> form = Key.create(Form.class, id);
-		liste.put(enonce, new Question(enonce, questionType, nbquestions, form));
+		//liste.put(enonce, new Question(enonce, questionType, nbquestions, form));
 		nbquestions++;
 	}
 
@@ -75,13 +74,10 @@ public class Form {
 		this.name = name;
 	}
 
-	public Key<Form> getKey() {
-		return key;
+	/*public com.googlecode.objectify.Key<Form> getKey() {
+	    return new com.googlecode.objectify.Key<Form>(Form.class, id); 
 	}
-
-	public void setKey(Key<Form> key) {
-		this.key = key;
-	}
+*/
 	
 	public void incr(){
 		nbquestions++;

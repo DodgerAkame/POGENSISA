@@ -25,18 +25,16 @@ public class FormCreatorServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		try {
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
-			Map<String,Question> questions = new HashMap<String,Question>();
+			/*Map<String,Question> questions = new HashMap<String,Question>();
 			for (int i  = 0; i < forms.size(); i++){
 				questions.putAll(forms.get(i).getListe());
-			}
+			}*/
 			
 			req.setAttribute("form", forms);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/displayForm.jsp").forward(req, resp);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

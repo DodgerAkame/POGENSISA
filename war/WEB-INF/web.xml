@@ -13,14 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>GuestbookObjectify</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>Panel</servlet-name>
-		<servlet-class>guestbookobjectify.CompomentServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>panel</servlet-name>
-		<url-pattern>/panel</url-pattern>
-	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>FormCreator</servlet-name>
 		<servlet-class>guestbookobjectify.FormCreatorServlet</servlet-class>
@@ -29,7 +22,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>FormCreator</servlet-name>
 		<url-pattern>/formcreator</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>Panel</servlet-name>
+		<servlet-class>guestbookobjectify.CompomentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Panel</servlet-name>
+		<url-pattern>/panel</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>guestbook.jsp</welcome-file>

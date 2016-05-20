@@ -17,9 +17,14 @@ public class Reponse {
 	private Reponse(){
 	}
 	
-	public Reponse(String reponse, Key<Question> parent){
+//	public Reponse(String reponse, Key<Question> parent){
+//		this.reponse = reponse;
+//		this.parent = parent;
+//	}
+	
+	public Reponse(String reponse){
 		this.reponse = reponse;
-		this.parent = parent;
+		this.id = 123L;
 	}
 
 	public Long getId() {
