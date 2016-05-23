@@ -12,28 +12,26 @@ public class Reponse {
 	private Long id;
 	@Unindex
 	private String reponse;
-	@Parent Key<Question> parent;
+	@Parent
+	Key<Question> parent;
 
-	private Reponse(){
+	private Reponse() {
 	}
-	
-//	public Reponse(String reponse, Key<Question> parent){
-//		this.reponse = reponse;
-//		this.parent = parent;
-//	}
-	
-	public Reponse(String reponse){
+
+	// public Reponse(String reponse, Key<Question> parent){
+	// this.reponse = reponse;
+	// this.parent = parent;
+	// }
+
+	public Reponse(String reponse) {
 		this.reponse = reponse;
-		this.id = 123L;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	/*
+	 * public Long getId() { return id; }
+	 * 
+	 * public void setId(Long id) { this.id = id; }
+	 */
 
 	public String getReponse() {
 		return reponse;
@@ -50,7 +48,5 @@ public class Reponse {
 	public void setParent(Key<Question> parent) {
 		this.parent = parent;
 	}
-	
-	
-	
+
 }

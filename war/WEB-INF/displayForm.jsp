@@ -20,76 +20,92 @@
 <meta charset="utf-8" />
 </head>
 
-<%
-	List<Form> forms = (List<Form>) request.getAttribute("form");
-	for (Form form : forms) {
-		Map<String, Question> buffer = new HashMap<String, Question>();
-%>
+
+<body>
+	<form method="post" action="">
+		<%
+			List<Form> forms = (List<Form>) request.getAttribute("form");
+			for (Form form : forms) {
+				Map<String, Question> buffer = new HashMap<String, Question>();
+		%>
 
 
-<h1>
-	<%=form.getName()%>
-</h1>
+		<h1>
+			<%=form.getName()%>
+		</h1>
 
 
-<%
-	for (int i = 0; i < form.getNbquestions(); i++) {
-%>
-
-<div name="question<%=i%>">
-	<h2>
-		<label>Enoncé de la question :<input type="text"
-			name="titreQuestion<%=i%>" value="Enoncé" /></label>
-	</h2>
+		<%
+			for (int i = 0; i < form.getNbquestions(); i++) {
+		%>
 
 
-	<div>
-		<p>Type de réponse</p>
-		<label>Checkbox<input type="radio" name="typeQuestion"
-			value="checkbox"></label> <br> <label>Bouton Radio<input
-			type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
-			de Texte<input type="radio" name="typeQuestion" value="text_area">
-		</label>
-	</div>
+
+		<div name="question<%=i%>">
+			<h2>
+				<label>Enoncé de la question :<input type="text"
+					name="titreQuestion<%=i%>" value="Enoncé" /></label>
+			</h2>
 
 
-	<div>
-		<p>Réponses</p>
+			<div>
+				<p>Type de réponse</p>
+				<label>Checkbox<input type="radio" name="typeQuestion"
+					value="checkbox"></label> <br> <label>Bouton Radio<input
+					type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
+					de Texte<input type="radio" name="typeQuestion" value="text_area">
+				</label>
+			</div>
 
-		<label><input type="text" name="reponse0" /></label><br> <label><input
-			type="text" name="reponse1" /></label><br>
-		<div id="extra<%=i%>"></div>
-		<label><input type="button" onclick="addField(<%=i%>);"
-			value="Ajouter une réponse" /></label>
-	</div>
 
-</div>
-<script type="text/javascript">
+			<div>
+				<p>Réponses</p>
 
-	<%List<Question> questions = new ArrayList<Question>();
-					Iterator it = form.getListe().entrySet().iterator();
-					while (it.hasNext()) {
-						questions.add((Question) it.next());
-					}%>
-	
-					var nb = 2;
-					
-	function addField(i) {
-		
-		var num = parseInt(i);
-<%-- 		<%questions.get(i).setNbreponses(questions.get(i).getNbreponses() + 1);%> --%>
-<%-- 		var nb = <%=questions.get(i).getNbreponses()%>; --%>
+				<label> <input type="text" name="numberAnswers1"
+					id="numberAnswers<%=i%>" value="2" />
+				</label> <label> <input type="text" name="<%=i%>reponse0" />
+				</label> <br> <label> <input type="text" name="<%=i%>reponse1" />
+				</label> <br>
+				<div id="extra<%=i%>"></div>
+				<label><input type="button" onclick="addField(<%=i%>);"
+					value="Ajouter une réponse" /></label>
 
-		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="reponse'+ nb +'"/><br>';
-		document.getElementById('extra' + num).appendChild(extra);
+			</div>
+			<%
+				String s = request.getParameter("numberAnswers1");
+			int r = 2;
+			%>
+			
+			<%=s%>
+		</div>
+		<script type="text/javascript">
+		function addField(i) {
+			alert(<%=r%>);
+			var num = parseInt(i);
+			var nb = document.getElementById("numberAnswers"+i).innerHTML;
+			var extra = document.createElement('label');
+			
+			extra.innerHTML = '<input type="text" name="'+ num +'reponse'+ nb +'"/><br>';
+			document.getElementById('extra' + num).appendChild(extra);
+			nb++;
+			<%r++;%>
+			//document.getElementById("numberAnswers"+num).innerHTML = nb;
+			document.getElementById("numberAnswers"+num).value = <%=r%>;
+			alert(<%=r%>);
+			
+<%-- 			<% --%>
+// 			List<Question> listeQs = new ArrayList<Question>(form.getListe().values());
+// 			Question buffQs = listeQs.get(listeQs.size() - 1);
+<%-- 			buffQs.incrNbReponse();%> --%>
 	}
 </script>
 
-<%
-	}
-	}
-%>
-
+		<%
+			}
+			}
+		%>
+		<a href="/panel"> <input type="submit" />
+		</a>
+	</form>
 </body>
 </html>

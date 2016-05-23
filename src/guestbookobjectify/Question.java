@@ -124,5 +124,9 @@ public class Question {
 	public void setReponses(List<Reponse> reponses) {
 		this.reponses = reponses;
 	}
+	
+	public void incrNbReponse(){
+		nbreponses++;
+	}
 
 }
