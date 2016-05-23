@@ -10,15 +10,14 @@ public class Compoment {
 	public Compoment(){}
 	
 	
-	public String Panel(Form key){
+	public String Panel(Form key,List<Question> qu){
 		Form form = key;
+		List<Question> question = qu;
 		String S = "<h1>"+form.getName()+"</h1>";
 		String C = "";
 		String T = "Formulaire";
 		
-		Map<String,Question> question = form.getListe();
-		for (Entry<String, Question> e : question.entrySet()){
-			Question q = e.getValue();
+		for (Question q : question){
 			T =  q.getEnonce();
 			if(q.getQuestion()== "checkbox"){
 				int i = 1;
@@ -46,8 +45,7 @@ public class Compoment {
 			}
 			S = S+"<form class=\"form-horizontal\">"+"\n"+
 					"<fieldset>"+"\n"+"<!-- Form Name -->"+"\n"+"<legend>"+T+"</legend>"+C+"</fieldset>"+"\n"+"</form>";
-			C = "";
-			System.out.println("hhee");					
+			C = "";				
 		}
 		return S;
 	}

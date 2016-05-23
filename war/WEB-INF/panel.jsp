@@ -23,10 +23,11 @@
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("form");
 		Form lastElement = forms.get(forms.size() - 1);
+		List<Question> q = (List<Question>) request.getAttribute("question");
 		Compoment c = new Compoment();
 	%>
 
-	<%=c.Panel(lastElement)%>
+	<%=c.Panel(lastElement,q)%>
 	<%=lastElement.getName()%>
 	<%=lastElement.getListe()%>
 
