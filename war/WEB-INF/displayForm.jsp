@@ -22,7 +22,7 @@
 <body>
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("form");
-		for (Form form : forms) {
+		Form form = forms.get(forms.size() - 1);
 	%>
 
 
@@ -34,7 +34,7 @@
 
 	<%
 		for (int i = 0; i < form.getNbquestions(); i++) {
-				qs.addQuestion(i, new Question());
+			qs.addQuestion(i, new Question());
 	%>
 	<form method="post" action="">
 		<div name="question<%=i%>">
@@ -46,10 +46,11 @@
 
 			<div>
 				<p>Type de réponse</p>
-				<label>Checkbox<input type="radio" name="typeQuestion"
+				<label>Checkbox<input type="radio" name="typeQuestion<%=i%>"
 					value="checkbox"></label> <br> <label>Bouton Radio<input
-					type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
-					de Texte<input type="radio" name="typeQuestion" value="text_area">
+					type="radio" name="typeQuestion<%=i%>" value="radio"></label> <br>
+				<label>Champ de Texte<input type="radio"
+					name="typeQuestion<%=i%>" value="text">
 				</label>
 			</div>
 
@@ -62,38 +63,40 @@
 				<label><input type="button" onclick="addField(<%=i%>);"
 					value="Ajouter une réponse" /></label>
 			</div>
+			<label><input type="hidden" value="1" id="numberAnswer<%=i%>" name="numberAnswer<%=i%>"></label>
 
 
 
 		</div>
 
-		<a href="/panel"> <input type="submit" />
-		</a>
 
-	</form>
 
-	<script type="text/javascript">
+		<script type="text/javascript">
 
 	function addField(i) {
 		
 		var num = parseInt(i);
-		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>;
+<%-- 		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>; --%>
+		var nb = document.getElementById("numberAnswer" + num).value;
+		alert(nb);
 		
 		var extra = document.createElement('label');
 		extra.innerHTML = '<input type "text" name="reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
-		<%qs.getQuestionIndex(i).incrNbReponse();%>
-		alert(<%=qs.getQuestionIndex(i).getNbreponses()%>);
+		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
 		
 	}
 	
 </script>
 
 
-	<%
-		}
-		}
-	%>
+		<%
+			}
+		%>
+
+		<a href="/panel"> <input type="submit" />
+		</a>
+	</form>
 
 </body>
 </html>

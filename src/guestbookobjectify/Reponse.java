@@ -1,5 +1,7 @@
 package guestbookobjectify;
 
+import java.util.Random;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -10,6 +12,7 @@ import com.googlecode.objectify.annotation.Unindex;
 public class Reponse {
 	@Id
 	private Long id;
+	long range = 123456789L;
 	@Unindex
 	private String reponse;
 	@Parent
@@ -18,20 +21,16 @@ public class Reponse {
 	private Reponse() {
 	}
 
-	// public Reponse(String reponse, Key<Question> parent){
-	// this.reponse = reponse;
-	// this.parent = parent;
-	// }
+
 
 	public Reponse(String reponse) {
 		this.reponse = reponse;
+		Random r = new Random();
+		id = (long) (r.nextDouble() * range);
+		this.parent = Key.create(Question.class, this.id);
 	}
 
-	/*
-	 * public Long getId() { return id; }
-	 * 
-	 * public void setId(Long id) { this.id = id; }
-	 */
+
 
 	public String getReponse() {
 		return reponse;
