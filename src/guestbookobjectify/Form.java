@@ -1,6 +1,8 @@
 package guestbookobjectify;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.googlecode.objectify.Key;
@@ -19,7 +21,7 @@ public class Form {
 	private Map<String, Question> liste = new HashMap<String, Question>();
 	private String name = "";
 	
-	private Form(){
+	public Form(){
 		
 	}
 
@@ -27,9 +29,15 @@ public class Form {
 		this.name = name;
 	}
 	
-	public void addQuestion(String enonce, String questionType, String nbreponses) {
+	public void addQuestion(String enonce, String questionType) {
 		Key<Form> form = Key.create(Form.class, id);
-		//liste.put(enonce, new Question(enonce, questionType, nbquestions, form));
+		liste.put(enonce, new Question(enonce, questionType));
+		nbquestions++;
+	}
+	
+	public void addQuestion(){
+		Key<Form> form = Key.create(Form.class, id);
+		liste.put("", new Question());
 		nbquestions++;
 	}
 
@@ -58,11 +66,11 @@ public class Form {
 		this.nbquestions = nbquestions;
 	}
 
-	public Map<String, Question> getListe() {
+	public Map<String, Question> getMap() {
 		return liste;
 	}
 
-	public void setListe(Map<String, Question> liste) {
+	public void setMap(Map<String, Question> liste) {
 		this.liste = liste;
 	}
 
@@ -83,5 +91,10 @@ public class Form {
 		nbquestions++;
 	}
 
-
+	public List<Question> getListe(){
+		Map<String, Question> buffer = getMap();
+		return new ArrayList<Question>(buffer.values());
+	}
+	
+	
 }

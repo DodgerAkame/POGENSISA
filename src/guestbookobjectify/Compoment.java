@@ -16,7 +16,7 @@ public class Compoment {
 		String C = "";
 		String T = "Formulaire";
 		
-		Map<String,Question> question = form.getListe();
+		Map<String,Question> question = form.getMap();
 		for (Entry<String, Question> e : question.entrySet()){
 			Question q = e.getValue();
 			T =  q.getEnonce();
