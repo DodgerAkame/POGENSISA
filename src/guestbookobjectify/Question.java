@@ -1,7 +1,10 @@
 package guestbookobjectify;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
@@ -13,48 +16,36 @@ public class Question {
 
 	@Id
 	Long id;
+	long range = 1234567L;
+
 	@Parent
-	private Key<Form> parent;
+	Key<Form> parent;
 
 	private String enonce;
 	private QuestionType question;
-	private int nbreponses = 2;
+	private int nbreponses = 1;
 	private List<Reponse> reponses = new ArrayList<Reponse>();
 
 	private enum QuestionType {
 		CHECKBOX, TEXT_AREA, RADIO_BUTTON
 	};
 
-	private Question() {
+	public Question() {
+		Random r = new Random();
+		id = (long) (r.nextDouble() * range);
+
+		enonce = "";
+		question = QuestionType.CHECKBOX;
 	}
 
-//	public Question(String enonce, String questionType, int nbreponses, Key<Form> parent) {
-//		this.enonce = enonce;
-//		this.nbreponses = nbreponses;
-//		this.parent = parent;
-//		
-//		switch (questionType) {
-//		case "checkbox":
-//			this.question = QuestionType.CHECKBOX;
-//			break;
-//		case "text":
-//			this.question = QuestionType.TEXT_AREA;
-//			break;
-//		case "radio":
-//			this.question = QuestionType.RADIO_BUTTON;
-//			break;
-//		default:
-//			this.question = QuestionType.CHECKBOX;
-//			break;
-//		}
-//
-//	}
-
-	public Question(String enonce, String questionType, int nbreponses) {
+	public Question(String enonce, String questionType) {
 		this.enonce = enonce;
-		this.nbreponses = nbreponses;
-		this.id = 123L;
-		
+
+		Random r = new Random();
+		id = (long) (r.nextDouble() * range);
+
+		this.parent = Key.create(Form.class, this.id);
+
 		switch (questionType) {
 		case "checkbox":
 			this.question = QuestionType.CHECKBOX;
@@ -71,11 +62,6 @@ public class Question {
 		}
 
 	}
-	
-	/*public void addReponse(String reponse) {
-		Key<Question> question = Key.create(Question.class, id);
-		reponses.add(new Reponse(reponse, question));
-	}*/
 
 	public Long getId() {
 		return id;
@@ -124,8 +110,8 @@ public class Question {
 	public void setReponses(List<Reponse> reponses) {
 		this.reponses = reponses;
 	}
-	
-	public void incrNbReponse(){
+
+	public void incrNbReponse() {
 		nbreponses++;
 	}
 

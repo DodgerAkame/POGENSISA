@@ -36,32 +36,27 @@ public class FormCreatorServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-//			String number = req.getParameter("numberQuestion");
-//			System.out.println(number);
-			
+
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 			Form form = forms.get(forms.size() - 1);
-			
-			for (int i = 0; i <form.getNbquestions(); i++) {
+
+			for (int i = 0; i < form.getNbquestions(); i++) {
 				String enonce = req.getParameter("titreQuestion" + i);
 				String typeQuestion = req.getParameter("typeQuestion");
-				
-				
-				String nbreponses = req.getParameter("numberAnswers" + i);
-				System.out.println(nbreponses);
-				
-				int nb = Integer.parseInt(nbreponses);
-				Question question = new Question(enonce, typeQuestion, nb);
-				
-				List<Reponse> bufferReponse = new ArrayList<Reponse>();
-				for (int j = 0; j < nb; j++) {
-					String reponse = req.getParameter(i + "reponse" + j);
-					Reponse rep = new Reponse(reponse);
-					
-					bufferReponse.add(rep);
-				}
-				
-				question.setReponses(bufferReponse);
+
+				Question question = new Question(enonce, typeQuestion);
+
+				ofy().save().entity(question);
+				/*
+				 * List<Reponse> bufferReponse = new ArrayList<Reponse>(); for
+				 * (int j = 0; j < nb; j++) { String reponse =
+				 * req.getParameter(i + "reponse" + j); Reponse rep = new
+				 * Reponse(reponse);
+				 * 
+				 * bufferReponse.add(rep); }
+				 */
+
+				// question.setReponses(bufferReponse);
 				
 			}
 
