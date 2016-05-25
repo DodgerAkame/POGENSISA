@@ -29,12 +29,7 @@
 			<input type="submit"/>
 		</a>
 	</form>
-<%
-	List<Form> forms = (List<Form>) request.getAttribute("form");
-Form lastElement = forms.get(forms.size() - 1);
-Compoment c = new Compoment();
-%>
-<%= c.Panel(lastElement) %>
+
 	<br>
 	<br>
 

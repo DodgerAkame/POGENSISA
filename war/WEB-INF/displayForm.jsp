@@ -58,7 +58,7 @@
 			<div>
 				<p>Réponses</p>
 
-				<label><input type="text" name="reponse0" /></label><br>
+				<label><input type="text" name="<%=i%>reponse0" /></label><br>
 				<div id="extra<%=i%>"></div>
 				<label><input type="button" onclick="addField(<%=i%>);"
 					value="Ajouter une réponse" /></label>
@@ -78,10 +78,10 @@
 		var num = parseInt(i);
 <%-- 		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>; --%>
 		var nb = document.getElementById("numberAnswer" + num).value;
-		alert(nb);
+		
 		
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="reponse'+ nb +'"/><br>';
+		extra.innerHTML = '<input type "text" name="'+ num +'reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
 		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
 		

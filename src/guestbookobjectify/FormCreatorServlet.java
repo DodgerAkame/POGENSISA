@@ -53,7 +53,7 @@ public class FormCreatorServlet extends HttpServlet {
 				
 				List<Reponse> reponses = new ArrayList<Reponse>();
 				for (int j = 0; j < nbreponse ; j++){
-					String reponse = req.getParameter("reponse"+j);
+					String reponse = req.getParameter(i+"reponse"+j);
 					Reponse rep = new Reponse(reponse);
 					reponses.add(rep);
 				}
