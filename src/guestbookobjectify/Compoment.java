@@ -56,8 +56,7 @@ public class Compoment {
 			}
 			S = S+"<form class=\"form-horizontal\">"+"\n"+
 					"<fieldset>"+"\n"+"<!-- Form Name -->"+"\n"+"<legend>"+T+"</legend>"+C+"</fieldset>"+"\n"+"</form>";
-			C = "";
-			System.out.println("hhee");					
+			C = "";				
 		}
 		return S;
 	}

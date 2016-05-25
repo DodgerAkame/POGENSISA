@@ -47,7 +47,7 @@
 			<div>
 				<p>Type de réponse</p>
 				<label>Checkbox<input type="radio" name="typeQuestion<%=i%>"
-					value="checkbox"></label> <br> <label>Bouton Radio<input
+					value="checkbox" checked></label> <br> <label>Bouton Radio<input
 					type="radio" name="typeQuestion<%=i%>" value="radio"></label> <br>
 				<label>Champ de Texte<input type="radio"
 					name="typeQuestion<%=i%>" value="text">
