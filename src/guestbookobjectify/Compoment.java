@@ -128,7 +128,7 @@ public String WriteRadioI(String key, int value){
     "<div class=\"col-md-4\">"+"\n"+
   "<div class=\"checkbox\">"+"\n"+
     "<label for=\"checkboxes-0\">"+"\n"+
-      "<input name=\"checkboxes\" id=\"checkboxes-0\" value="+v+" type=\"checkbox\">"
+      "<input name=\"checkboxes\" id=\"checkboxes-0\" value="+Key+" type=\"checkbox\">"
       +Key+"\n"+
     "</label>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</div>";
 		return S;
