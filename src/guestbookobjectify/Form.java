@@ -1,6 +1,9 @@
 package guestbookobjectify;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,33 +12,55 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Unindex;
 
-@Index
+
 @Entity
 public class Form {
 	@Id
 	Long id;
-	@Unindex
 	private int nbquestions = 0;
 	private Map<String, Question> liste = new HashMap<String, Question>();
 	private String name = "";
+	private String date;
+	@Index
+	private int rank = 0;
 	
-	public Form(){
-		
+
+	public Form() {
+
 	}
 
-	public Form(String name){
+	public Form(String name, int i) {
 		this.name = name;
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		this.date = dateFormat.format(cal.getTime());
+		this.rank = i;
 	}
-	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
 	public void addQuestion(String enonce, String questionType) {
 		Key<Form> form = Key.create(Form.class, id);
 		liste.put(enonce, new Question(enonce, questionType));
 		nbquestions++;
 	}
-	
-	public void addQuestion(){
+
+	public void addQuestion() {
 		Key<Form> form = Key.create(Form.class, id);
 		liste.put("", new Question());
 		nbquestions++;
@@ -82,19 +107,18 @@ public class Form {
 		this.name = name;
 	}
 
-	/*public com.googlecode.objectify.Key<Form> getKey() {
-	    return new com.googlecode.objectify.Key<Form>(Form.class, id); 
-	}
-*/
-	
-	public void incr(){
+	/*
+	 * public com.googlecode.objectify.Key<Form> getKey() { return new
+	 * com.googlecode.objectify.Key<Form>(Form.class, id); }
+	 */
+
+	public void incr() {
 		nbquestions++;
 	}
 
-	public List<Question> getListe(){
+	public List<Question> getListe() {
 		Map<String, Question> buffer = getMap();
 		return new ArrayList<Question>(buffer.values());
 	}
-	
-	
+
 }
