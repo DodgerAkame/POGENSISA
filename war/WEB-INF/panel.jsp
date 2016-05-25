@@ -27,8 +27,6 @@
 	%>
 
 	<%=c.Panel(lastElement)%>
-	<%=lastElement.getName()%>
-	<%=lastElement.getListe()%>
 
 </body>
 </html>

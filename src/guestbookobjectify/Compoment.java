@@ -9,13 +9,23 @@ public class Compoment {
 
 	public Compoment(){}
 	
+	public String PanelQ(List<Question> qs){
+		
+		String S = "";
+		List<Question> question = qs;
+		int i = 0;
+		for(Question q : question){
+				S = S+WritecheckBox(q.getEnonce(),i);
+				i++;
+		}
+		return S;
+	}
 	
 	public String Panel(Form key){
 		Form form = key;
 		String S = "<h1>"+form.getName()+"</h1>";
 		String C = "";
 		String T = "Formulaire";
-		
 		Map<String,Question> question = form.getMap();
 		for (Entry<String, Question> e : question.entrySet()){
 			Question q = e.getValue();

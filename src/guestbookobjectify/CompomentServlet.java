@@ -23,6 +23,7 @@ public class CompomentServlet extends HttpServlet {
 		try {
 			
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			Form lastElement = forms.get(forms.size() - 1);
 			req.setAttribute("form", forms);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(req, resp);
 			
