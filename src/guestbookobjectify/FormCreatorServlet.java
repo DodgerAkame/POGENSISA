@@ -27,7 +27,8 @@ public class FormCreatorServlet extends HttpServlet {
 		try {
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			req.setAttribute("form", forms);
+			Form form = forms.get(forms.size() - 1);
+			req.setAttribute("formfilter", forms);
 
 			this.getServletContext().getRequestDispatcher("/WEB-INF/displayForm.jsp").forward(req, resp);
 		} catch (ServletException e) {
@@ -40,7 +41,8 @@ public class FormCreatorServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
+					.filter("rank", ofy().load().type(Form.class).list().size()).list();
 			Form form = forms.get(forms.size() - 1);
 			Map<String, Question> liste = new HashMap<String, Question>();
 
@@ -62,7 +64,7 @@ public class FormCreatorServlet extends HttpServlet {
 					reponses.add(rep);
 				}
 				question.setReponses(reponses);
-				liste.put(typeQuestion, question);
+				liste.put(enonce, question);
 				ofy().save().entity(question);
 
 			}

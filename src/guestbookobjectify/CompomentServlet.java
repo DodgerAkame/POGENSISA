@@ -13,26 +13,30 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.ObjectifyService;
 
 public class CompomentServlet extends HttpServlet {
-	static{
+	static {
 		ObjectifyService.register(Form.class);
 		ObjectifyService.register(Question.class);
 		ObjectifyService.register(Reponse.class);
 	}
-	
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
-			Form lastElement = forms.get(forms.size() - 1);
+
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
+					.filter("rank", ofy().load().type(Form.class).list().size()).list();
+			//Form lastElement = forms.get(forms.size() - 1);
 			req.setAttribute("form", forms);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(req, resp);
-			
+
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+
+	}
+
 }
