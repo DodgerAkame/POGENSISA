@@ -53,17 +53,23 @@ public class CompomentServlet extends HttpServlet {
 					StringBuffer sb = new StringBuffer();
 
 					if (qs.getQuestion().equals("checkbox")) {
-						String[] checked = req.getParameterValues("checkboxes" + l);
+						String[] checked;
+						checked = new String[qs.getNbreponses()];
+						for (int z = 0; z < qs.getNbreponses(); z++) {
+							checked[z] = "";
+						}
+
+						if (req.getParameterValues("checkboxes" + l) != null)
+							checked = req.getParameterValues("checkboxes" + l);
+						
 						for (int j = 0; j < checked.length; j++) {
 							sb.append(checked[j]);
 							sb.append('|');
 						}
-					}
-
-					else if (qs.getQuestion().equals("text")) {
+					} else if (qs.getQuestion().equals("text")) {
 						sb.append(req.getParameter("textreponse"));
 					} else {
-						sb.append(req.getParameter("radios"+l));
+						sb.append(req.getParameter("radios" + l));
 					}
 
 					Reponse rep = new Reponse(sb.toString());
@@ -77,7 +83,7 @@ public class CompomentServlet extends HttpServlet {
 
 			ofy().save().entity(user).now();
 
-			resp.sendRedirect("/");
+			resp.sendRedirect("/results");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

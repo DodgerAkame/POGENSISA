@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>Livre d'or</title>
+<title>POGENSISA</title>
 <meta charset="utf-8" />
 </head>
 <body>
