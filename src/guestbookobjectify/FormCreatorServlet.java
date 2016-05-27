@@ -70,11 +70,6 @@ public class FormCreatorServlet extends HttpServlet {
 			}
 			form.setMap(liste);
 			ofy().save().entity(form).now();
-			List<Form> forms2 = (List<Form>) ofy().load().type(Form.class).list();
-			Form form2 = forms2.get(forms2.size() - 1);
-
-			System.out.println(form2.getMap());
-			System.out.println("fini");
 
 			resp.sendRedirect("/panel");
 		} catch (IOException e) {

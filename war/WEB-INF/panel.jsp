@@ -20,13 +20,19 @@
 <meta charset="utf-8" />
 </head>
 <body>
+
+
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("form");
 		Form lastElement = forms.get(forms.size() - 1);
 		Compoment c = new Compoment();
 	%>
-
-	<%=c.Panel(lastElement)%>
+	<form method="post">
+		
+			<%=c.Panel(lastElement)%>
+	
+		<input type="submit" />
+	</form>
 
 </body>
 </html>
