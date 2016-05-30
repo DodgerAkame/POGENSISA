@@ -6,22 +6,26 @@ import java.util.Map.Entry;
 
 public class Compoment {
 
-	public Compoment() {
-	}
 
-	public String PanelQ(List<Question> qs) {
-
+	public Compoment(){}
+	
+public String PanelQ(List<Question> qs){
+		
 		String S = "";
 		List<Question> question = qs;
 		int i = 0;
-		for (Question q : question) {
-			S = S + WritecheckBox(q.getEnonce(), i);
-			i++;
+		for(Question q : question){
+				S = S+WritecheckBox(q.getEnonce(),i);
+				i++;
+
 		}
 		return S;
 	}
 
+
 	public String Panel(Form key) {
+
+
 		Form form = key;
 		String S = "<h1>" + form.getName() + "</h1>\n";
 		String C = "";
