@@ -3,6 +3,7 @@ package guestbookobjectify;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,9 +24,15 @@ public class ResultServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<User> users = (List<User>) ofy().load().type(User.class).list();
-			req.setAttribute("numberuser", users.size());
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
+					.filter("rank", ofy().load().type(Form.class).list().size()).list();
+			Form form = forms.get(forms.size() - 1);
 			
+			List<User> users = (List<User>) ofy().load().type(User.class).filter("idForm", form.getId()).list();
+			
+			req.setAttribute("formResult", form);
+			req.setAttribute("users", users);
+
 			this.getServletContext().getRequestDispatcher("/WEB-INF/dispResult.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			e.printStackTrace();

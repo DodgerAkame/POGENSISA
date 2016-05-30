@@ -61,24 +61,27 @@ public class CompomentServlet extends HttpServlet {
 
 						if (req.getParameterValues("checkboxes" + l) != null)
 							checked = req.getParameterValues("checkboxes" + l);
-						
+
 						for (int j = 0; j < checked.length; j++) {
 							sb.append(checked[j]);
-							sb.append('|');
+							sb.append(" | ");
 						}
 					} else if (qs.getQuestion().equals("text")) {
 						sb.append(req.getParameter("textreponse"));
 					} else {
 						sb.append(req.getParameter("radios" + l));
+						sb.append(" | ");
 					}
 
 					Reponse rep = new Reponse(sb.toString());
 					userReponse.put(qs.getEnonce(), rep);
+
 				}
 
 			}
 
 			User user = new User();
+			user.setIdForm(form.getId()); //Stocker l'ID du formulaire
 			user.setReponses(userReponse);
 
 			ofy().save().entity(user).now();
