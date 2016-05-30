@@ -1,0 +1,111 @@
+<%@page import="java.util.StringTokenizer"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="com.google.appengine.api.datastore.*"%>
+<%@ page import="static com.googlecode.objectify.ObjectifyService.ofy"%>
+
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.Iterator"%>
+
+<%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
+<%@ page import="guestbookobjectify.*"%>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>POGENSISA</title>
+<meta charset="utf-8" />
+</head>
+<body>
+
+	<%
+		Form form = (Form) request.getAttribute("formResult");
+		List<User> users = (List<User>) request.getAttribute("users");
+		float sizeUsers = users.size();
+	%>
+	<h1><%=form.getName()%></h1>
+	<p>
+		Nombre d'utilisateurs ayant répondu :
+		<%=users.size()%>
+		personnes
+	</p>
+	<%
+		for (int i = 0; i < form.getNbquestions(); i++) {
+			Question qs = form.getListe().get(i);
+	%>
+
+	<h2><%=qs.getEnonce()%></h2>
+	<h4>
+		<u>Type de la question</u> :
+		<%=qs.getQuestion().toString()%></h4>
+
+
+	<div name="reponses<%=i%>">
+		<%
+			if (qs.getQuestion().toString() != "text") {
+					for (int j = 0; j < qs.getReponses().size(); j++) {
+		%>
+		<%
+			float counter = 0;
+		%>
+		<p><%=qs.getReponses().get(j).getReponse()%>
+			&nbsp; &nbsp; &nbsp;
+			<%
+				for (User user : users) {
+
+								Reponse rep = user.getReponses().get(qs.getEnonce());
+								StringTokenizer st = new StringTokenizer(rep.getReponse(), " | ");
+
+								while (st.hasMoreTokens()) {
+									String stbuff = st.nextToken().toString();
+									if (stbuff.equals(qs.getReponses().get(j).getReponse()))
+										counter++;
+
+								}
+
+							}
+			%><%=(counter / sizeUsers) * 100%>
+			%
+			<%-- On affiche ici --%>
+		</p>
+		<br>
+		<%
+			}
+				} else {
+		%><button type="button"
+			onClick="document.getElementById('text<%=i%>').style.display='inline-block';">Afficher
+			les réponses</button>
+		<button type="button"
+			onClick="document.getElementById('text<%=i%>').style.display='none';">Cacher
+			les réponses</button>
+		<br>
+		<div id="text<%=i%>" style="display: none">
+			<%
+				for (User user : users) {
+			%>
+
+			<p><%=user.getReponses().get(qs.getEnonce()).getReponse()%></p>
+			<br>
+			<%
+				}
+			%>
+		</div>
+		<%
+			}
+		%>
+
+	</div>
+	<br>
+
+	<%
+		}
+	%>
+
+
+</body>
+</html>

@@ -13,10 +13,21 @@ public class User {
 
 	@Id
 	Long id;
-	long range = 123456789L;
+	private long range = 123456789L;
 	private Map<String, Reponse> reponses = new HashMap<String, Reponse>();
 	@Index
 	private String name;
+	@Index
+	private long idForm;
+	
+	
+	public long getIdForm() {
+		return idForm;
+	}
+
+	public void setIdForm(long idForm) {
+		this.idForm = idForm;
+	}
 
 	public User() {
 		this.name = "";

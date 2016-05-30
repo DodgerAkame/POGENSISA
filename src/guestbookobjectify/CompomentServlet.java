@@ -53,31 +53,40 @@ public class CompomentServlet extends HttpServlet {
 					StringBuffer sb = new StringBuffer();
 
 					if (qs.getQuestion().equals("checkbox")) {
-						String[] checked = req.getParameterValues("checkboxes" + l);
+						String[] checked;
+						checked = new String[qs.getNbreponses()];
+						for (int z = 0; z < qs.getNbreponses(); z++) {
+							checked[z] = "";
+						}
+
+						if (req.getParameterValues("checkboxes" + l) != null)
+							checked = req.getParameterValues("checkboxes" + l);
+
 						for (int j = 0; j < checked.length; j++) {
 							sb.append(checked[j]);
-							sb.append('|');
+							sb.append(" | ");
 						}
-					}
-
-					else if (qs.getQuestion().equals("text")) {
+					} else if (qs.getQuestion().equals("text")) {
 						sb.append(req.getParameter("textreponse"));
 					} else {
-						sb.append(req.getParameter("radios"+l));
+						sb.append(req.getParameter("radios" + l));
+						sb.append(" | ");
 					}
 
 					Reponse rep = new Reponse(sb.toString());
 					userReponse.put(qs.getEnonce(), rep);
+
 				}
 
 			}
 
 			User user = new User();
+			user.setIdForm(form.getId()); //Stocker l'ID du formulaire
 			user.setReponses(userReponse);
 
 			ofy().save().entity(user).now();
 
-			resp.sendRedirect("/");
+			resp.sendRedirect("/results");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
