@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.google.appengine.api.datastore.*"%>
+<%@ page import="static com.googlecode.objectify.ObjectifyService.ofy" %>
 
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
@@ -16,12 +17,12 @@
 
 <html>
 <head>
-<title>Livre d'or</title>
+<title>POGENSISA</title>
 <meta charset="utf-8" />
 </head>
 <body>
 	<%
-		List<Form> forms = (List<Form>) request.getAttribute("form");
+		List<Form> forms = (List<Form>) request.getAttribute("formfilter");
 		Form form = forms.get(forms.size() - 1);
 	%>
 
@@ -35,6 +36,7 @@
 	<%
 		for (int i = 0; i < form.getNbquestions(); i++) {
 			qs.addQuestion(i, new Question());
+			qs.getMap().get(i).setNbreponses(1);
 	%>
 	<form method="post" action="">
 		<div name="question<%=i%>">
@@ -47,7 +49,7 @@
 			<div>
 				<p>Type de réponse</p>
 				<label>Checkbox<input type="radio" name="typeQuestion<%=i%>"
-					value="checkbox"></label> <br> <label>Bouton Radio<input
+					value="checkbox" checked></label> <br> <label>Bouton Radio<input
 					type="radio" name="typeQuestion<%=i%>" value="radio"></label> <br>
 				<label>Champ de Texte<input type="radio"
 					name="typeQuestion<%=i%>" value="text">

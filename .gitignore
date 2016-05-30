@@ -3,3 +3,8 @@
 /.project
 *.class
 *.prefs
+war/WEB-INF/classes/guestbookobjectify/Compoment.class
+*.jar
+.classpath
+.settings/com.google.appengine.eclipse.core.prefs
+*.prefs
