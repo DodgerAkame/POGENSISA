@@ -38,7 +38,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Results</servlet-name>
-		<url-pattern>/results</url-pattern>
+		<url-pattern>/results/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

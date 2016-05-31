@@ -89,7 +89,7 @@ public class CompomentServlet extends HttpServlet {
 
 			ofy().save().entity(user).now();
 
-			resp.sendRedirect("/results");
+			resp.sendRedirect("/results/" + form.getId());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

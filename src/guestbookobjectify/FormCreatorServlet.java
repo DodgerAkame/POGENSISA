@@ -47,8 +47,18 @@ public class FormCreatorServlet extends HttpServlet {
 			Form form = forms.get(forms.size() - 1);
 			Map<String, Question> liste = new HashMap<String, Question>();
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
-			String[] checked = req.getParameterValues("checkboxes1");
+
+			String[] checked;
+			
 			for (Question q : questions) {
+				
+				checked = new String[q.getNbreponses()];
+				for (int z = 0; z < q.getNbreponses(); z++) {
+					checked[z] = "";
+				}
+				if (req.getParameterValues("checkboxes1") != null)
+					checked = req.getParameterValues("checkboxes1");
+				
 				String qenonce = q.getEnonce();
 				for (int j = 0; j < checked.length; j++) {
 					String check = checked[j];
@@ -83,7 +93,9 @@ public class FormCreatorServlet extends HttpServlet {
 			form.setNbquestions(liste.size());
 			ofy().save().entity(form).now();
 
-			resp.sendRedirect("/panel/" + form.getId());
+			String bufferID = form.getId().toString();
+			
+			resp.sendRedirect("/panel/" + bufferID);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

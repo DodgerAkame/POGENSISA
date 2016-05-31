@@ -34,6 +34,8 @@
 			}
 		}
 		Compoment c = new Compoment();
+
+		if (lastElement.isOpened()) {
 	%>
 	<form method="post">
 
@@ -41,6 +43,16 @@
 
 		<input type="submit" />
 	</form>
+	<%
+		} else {
+	%>
+	<p>Le questionnaire est fermé, les résultats sont disponibles à l'adresse suivante :</p>
+	<br>
+	<p><a href="/results/<%=lastElement.getId()%>">Resultats du questionnaire</a></p>
+	<%
+		}
+	%>
+
 
 </body>
 </html>

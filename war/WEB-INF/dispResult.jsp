@@ -24,6 +24,7 @@
 
 
 	<%
+		String uri = (String) request.getAttribute("IDFormResult");
 		Form form = (Form) request.getAttribute("formResult");
 		List<User> users = (List<User>) request.getAttribute("users");		
 		form.setUsersAnswered(users.size());
@@ -36,7 +37,7 @@
 		personnes
 	</p>
 	<%
-	if (form.isOpened()){
+	if (!form.isOpened()){
 		for (int i = 0; i < form.getNbquestions(); i++) {
 			Question qs = form.getListe().get(i);
 	%>
@@ -103,6 +104,10 @@
 
 	<%
 		}
+	} else {
+		%>
+		<b>Le questionnaire est en cours, veuillez attendre la clôture du questionnaire</b>
+		<%
 	}
 	%>
 
