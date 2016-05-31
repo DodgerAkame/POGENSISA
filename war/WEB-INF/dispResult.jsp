@@ -36,6 +36,7 @@
 		personnes
 	</p>
 	<%
+	if (form.isOpened()){
 		for (int i = 0; i < form.getNbquestions(); i++) {
 			Question qs = form.getListe().get(i);
 	%>
@@ -102,6 +103,7 @@
 
 	<%
 		}
+	}
 	%>
 
 
