@@ -33,5 +33,7 @@
 	<br>
 	<br>
 
+<a href="/creation">CRUD</a>
+
 </body>
 </html>

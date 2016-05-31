@@ -23,6 +23,7 @@ public class Question {
 	private QuestionType question;
 	private int nbreponses = 1;
 	private List<Reponse> reponses = new ArrayList<Reponse>();
+	private String categorie;
 
 	private enum QuestionType {
 		CHECKBOX, TEXT_AREA, RADIO_BUTTON
@@ -32,26 +33,27 @@ public class Question {
 		Random r = new Random();
 		id = (long) (r.nextDouble() * range);
 
+		setCategorie("");
 		enonce = "";
 		question = QuestionType.CHECKBOX;
 	}
 
-	public Question(String enonce, String questionType) {
+	public Question(String enonce, String questionType, String categorie) {
 		this.enonce = enonce;
+		this.setCategorie(categorie);
 
 		Random r = new Random();
 		id = (long) (r.nextDouble() * range);
 
 		this.parent = Key.create(Form.class, this.id);
 
-		if(questionType.equals("checkbox")){
+		if (questionType.equals("checkbox")) {
 			this.question = QuestionType.CHECKBOX;
 		} else if (questionType.equals("radio")) {
 			this.question = QuestionType.RADIO_BUTTON;
-		} else{
+		} else {
 			this.question = QuestionType.TEXT_AREA;
 		}
-		
 
 	}
 
@@ -105,6 +107,14 @@ public class Question {
 
 	public void incrNbReponse() {
 		nbreponses++;
+	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
 	}
 
 }

@@ -6,8 +6,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-java-sdk-1.9.36"/>
-	<classpathentry kind="lib" path="C:/Users/Melh/Documents/GitHub/POGENSISA/war/WEB-INF/lib/google-guava.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Melh/Documents/GitHub/POGENSISA/war/WEB-INF/lib/objectify-5.1.5.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/WildCerebrus/Documents/GitHub/POGENSISA/war/WEB-INF/lib/google-guava.jar"/>
+	<classpathentry kind="lib" path="C:/Users/WildCerebrus/Documents/GitHub/POGENSISA/war/WEB-INF/lib/objectify-5.1.5.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

@@ -29,6 +29,8 @@ public class FormCreatorServlet extends HttpServlet {
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();
 			Form form = forms.get(forms.size() - 1);
 			req.setAttribute("formfilter", forms);
+			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
+			req.setAttribute("question", questions);
 
 			this.getServletContext().getRequestDispatcher("/WEB-INF/displayForm.jsp").forward(req, resp);
 		} catch (ServletException e) {
@@ -40,21 +42,33 @@ public class FormCreatorServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-
+		
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();
 			Form form = forms.get(forms.size() - 1);
 			Map<String, Question> liste = new HashMap<String, Question>();
-
+			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
+			String[] checked = req.getParameterValues("checkboxes1");
+			for(Question q : questions){
+				String qenonce = q.getEnonce();
+				for(int j= 0; j<checked.length; j++){
+					String check = checked[j];
+						if(qenonce.equals(check)){
+							liste.put(qenonce, q);
+						}
+					}
+				}
 			for (int i = 0; i < form.getNbquestions(); i++) {
+				
 				String enonce = req.getParameter("titreQuestion" + i);
 				String typeQuestion = req.getParameter("typeQuestion" + i);
 				String nbrepontxt = req.getParameter("numberAnswer" + i);
-				System.out.println(nbrepontxt);
+				String categorie = req.getParameter("categorie" +i);
+		
 
 				int nbreponse = Integer.parseInt(nbrepontxt);
 
-				Question question = new Question(enonce, typeQuestion);
+				Question question = new Question(enonce, typeQuestion, categorie);
 				question.setNbreponses(nbreponse);
 
 				List<Reponse> reponses = new ArrayList<Reponse>();
@@ -70,6 +84,8 @@ public class FormCreatorServlet extends HttpServlet {
 			}
 			form.setMap(liste);
 			ofy().save().entity(form).now();
+
+			
 
 			resp.sendRedirect("/panel");
 		} catch (IOException e) {

@@ -17,13 +17,15 @@
 
 <html>
 <head>
-<title>POGENSISA</title>
+<title>Livre d'or</title>
 <meta charset="utf-8" />
 </head>
 <body>
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("formfilter");
 		Form form = forms.get(forms.size() - 1);
+		List<Question> question = (List<Question>) request.getAttribute("question");			
+
 	%>
 
 
@@ -38,13 +40,17 @@
 			qs.addQuestion(i, new Question());
 			qs.getMap().get(i).setNbreponses(1);
 	%>
+
 	<form method="post" action="">
 		<div name="question<%=i%>">
 			<h2>
 				<label>Enoncé de la question :<input type="text"
 					name="titreQuestion<%=i%>" value="Enoncé" /></label>
 			</h2>
-
+			<p>
+				<label>Categorie de la question :<input type="text"
+					name="categorie<%=i%>" value="categorie" /></label>
+			</p>
 
 			<div>
 				<p>Type de réponse</p>
@@ -83,7 +89,7 @@
 		
 		
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="'+ num +'reponse'+ nb +'"/><br>';
+		extra.innerHTML = '<input type="text" name="'+ num +'reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
 		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
 		
@@ -95,10 +101,22 @@
 		<%
 			}
 		%>
+		
+<fieldset>
 
-		<a href="/panel"> <input type="submit" />
+<!-- Form Name -->
+<legend>Question déjà crée</legend>
+<%
+Compoment c = new Compoment(); %>
+<%= c.PanelQ(question) %>
+
+
+</fieldset>
+<a href="/panel"> <input type="submit" />
 		</a>
-	</form>
+</form>
+		
+
 
 </body>
 </html>

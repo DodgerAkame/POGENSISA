@@ -6,26 +6,33 @@ import java.util.Map.Entry;
 
 public class Compoment {
 
+	public Compoment() {
+	}
 
-	public Compoment(){}
-	
-public String PanelQ(List<Question> qs){
-		
+	public String PanelF(List<Form> form) {
 		String S = "";
-		List<Question> question = qs;
+		List<Form> formu = form;
 		int i = 0;
-		for(Question q : question){
-				S = S+WritecheckBox(q.getEnonce(),i);
-				i++;
-
+		for (Form f : formu) {
+			S = S + WriteRadio(f.getName(), i, i);
+			i++;
 		}
 		return S;
 	}
 
+	public String PanelQ(List<Question> qs) {
+
+		String S = "";
+		List<Question> question = qs;
+		int i = 0;
+		for (Question q : question) {
+			S = S + WritecheckBox(q.getEnonce(), i, 1) + "   nombre de réponse :" + q.getNbreponses();
+			i++;
+		}
+		return S;
+	}
 
 	public String Panel(Form key) {
-
-
 		Form form = key;
 		String S = "<h1>" + form.getName() + "</h1>\n";
 		String C = "";
@@ -83,7 +90,7 @@ public String PanelQ(List<Question> qs){
 		String S = "<div class=\"form-group\">" + "\n"
 				+ "<label class=\"col-md-4 control-label\" for=\"textarea\"></label>" + "\n"
 				+ "<div class=\"col-md-4\">" + "\n"
-				+ "<textarea class=\"form-control\" id=\"textarea\" name=\"textreponse\">" + key + "</textarea>" + "\n"
+				+ "<textarea class=\"form-control\" id=\"textarea\" name=\"textreponse\">+" + key + "</textarea>" + "\n"
 				+ " </div>" + "\n" + "</div>" + "\n";
 		return S;
 	}
@@ -149,5 +156,19 @@ public String PanelQ(List<Question> qs){
 				+ "\" type=\"checkbox\">" + Key + "\n" + "</label>" + "\n" + "</div>" + "\n" + "</div>" + "\n"
 				+ "</div>";
 		return S;
+	}
+
+	public String WriteSelect(List<String> cat) {
+		String S = "<div class=\"form-group\">  <label class=\"col-md-4 control-label\" for=\"selectbasic\"></label>  <div class=\"col-md-4\">"
+				+ "   <select id=\"select\" name=\"select\" class=\"form-control\" size=\"1\">";
+		int i = 0;
+		for (String c : cat) {
+			String X = "<option value=\"" + c + "\">" + c + "</option> ";
+			S = S + X;
+			i++;
+		}
+		S = S + "</select></div></div>";
+		return S;
+
 	}
 }
