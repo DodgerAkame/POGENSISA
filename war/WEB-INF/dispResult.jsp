@@ -10,7 +10,6 @@
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Iterator"%>
 
-<%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
 <%@ page import="guestbookobjectify.*"%>
 
 
@@ -23,15 +22,17 @@
 </head>
 <body>
 
+
 	<%
 		Form form = (Form) request.getAttribute("formResult");
-		List<User> users = (List<User>) request.getAttribute("users");
-		float sizeUsers = users.size();
+		List<User> users = (List<User>) request.getAttribute("users");		
+		form.setUsersAnswered(users.size());
 	%>
+
 	<h1><%=form.getName()%></h1>
 	<p>
 		Nombre d'utilisateurs ayant répondu :
-		<%=users.size()%>
+		<%=form.getUsersAnswered()%>
 		personnes
 	</p>
 	<%
@@ -50,9 +51,6 @@
 			if (qs.getQuestion().toString() != "text") {
 					for (int j = 0; j < qs.getReponses().size(); j++) {
 		%>
-		<%
-			float counter = 0;
-		%>
 		<p><%=qs.getReponses().get(j).getReponse()%>
 			&nbsp; &nbsp; &nbsp;
 			<%
@@ -64,12 +62,12 @@
 								while (st.hasMoreTokens()) {
 									String stbuff = st.nextToken().toString();
 									if (stbuff.equals(qs.getReponses().get(j).getReponse()))
-										counter++;
+										qs.getReponses().get(j).incrEffectif();
 
 								}
 
 							}
-			%><%=(counter / sizeUsers) * 100%>
+			%><%=(qs.getReponses().get(j).getEffectif() / form.getUsersAnswered()) * 100%>
 			%
 			<%-- On affiche ici --%>
 		</p>
