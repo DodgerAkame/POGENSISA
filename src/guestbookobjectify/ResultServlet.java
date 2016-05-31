@@ -41,8 +41,5 @@ public class ResultServlet extends HttpServlet {
 		}
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
-
-	}
 
 }

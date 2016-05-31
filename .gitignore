@@ -8,3 +8,7 @@ war/WEB-INF/classes/guestbookobjectify/Compoment.class
 .classpath
 .settings/com.google.appengine.eclipse.core.prefs
 *.prefs
+*.jar
+.classpath
+*.class
+.settings/com.google.appengine.eclipse.core.prefs

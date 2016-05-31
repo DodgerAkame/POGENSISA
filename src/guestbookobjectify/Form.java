@@ -24,7 +24,8 @@ public class Form {
 	private String date;
 	@Index
 	private int rank = 0;
-	
+	private boolean isOpened;
+	private int usersAnswered;
 
 	public Form() {
 
@@ -36,6 +37,8 @@ public class Form {
 		Calendar cal = Calendar.getInstance();
 		this.date = dateFormat.format(cal.getTime());
 		this.rank = i;
+		this.isOpened = false;
+		this.usersAnswered = 0;
 	}
 
 	public String getDate() {
@@ -107,11 +110,7 @@ public class Form {
 		this.name = name;
 	}
 
-	/*
-	 * public com.googlecode.objectify.Key<Form> getKey() { return new
-	 * com.googlecode.objectify.Key<Form>(Form.class, id); }
-	 */
-
+	
 	public void incr() {
 		nbquestions++;
 	}
@@ -119,6 +118,22 @@ public class Form {
 	public List<Question> getListe() {
 		Map<String, Question> buffer = getMap();
 		return new ArrayList<Question>(buffer.values());
+	}
+
+	public boolean isOpened() {
+		return isOpened;
+	}
+
+	public void setOpened(boolean isOpened) {
+		this.isOpened = isOpened;
+	}
+
+	public int getUsersAnswered() {
+		return usersAnswered;
+	}
+
+	public void setUsersAnswered(int usersAnswered) {
+		this.usersAnswered = usersAnswered;
 	}
 
 }

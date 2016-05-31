@@ -17,20 +17,18 @@ public class Reponse {
 	private String reponse;
 	@Parent
 	Key<Question> parent;
+	private float effectif;
 
 	private Reponse() {
 	}
-
-
 
 	public Reponse(String reponse) {
 		this.reponse = reponse;
 		Random r = new Random();
 		id = (long) (r.nextDouble() * range);
 		this.parent = Key.create(Question.class, this.id);
+		this.effectif = 0;
 	}
-
-
 
 	public String getReponse() {
 		return reponse;
@@ -46,6 +44,18 @@ public class Reponse {
 
 	public void setParent(Key<Question> parent) {
 		this.parent = parent;
+	}
+
+	public float getEffectif() {
+		return effectif;
+	}
+
+	public void setEffectif(float effectif) {
+		this.effectif = effectif;
+	}
+	
+	public void incrEffectif(){
+		this.effectif++;
 	}
 
 }
