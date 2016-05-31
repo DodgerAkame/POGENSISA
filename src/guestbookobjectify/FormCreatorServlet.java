@@ -27,7 +27,6 @@ public class FormCreatorServlet extends HttpServlet {
 		try {
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			Form form = forms.get(forms.size() - 1);
 			req.setAttribute("formfilter", forms);
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
 			req.setAttribute("question", questions);
@@ -42,29 +41,28 @@ public class FormCreatorServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-		
+
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();
 			Form form = forms.get(forms.size() - 1);
 			Map<String, Question> liste = new HashMap<String, Question>();
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
 			String[] checked = req.getParameterValues("checkboxes1");
-			for(Question q : questions){
+			for (Question q : questions) {
 				String qenonce = q.getEnonce();
-				for(int j= 0; j<checked.length; j++){
+				for (int j = 0; j < checked.length; j++) {
 					String check = checked[j];
-						if(qenonce.equals(check)){
-							liste.put(qenonce, q);
-						}
+					if (qenonce.equals(check)) {
+						liste.put(qenonce, q);
 					}
 				}
+			}
 			for (int i = 0; i < form.getNbquestions(); i++) {
-				
+
 				String enonce = req.getParameter("titreQuestion" + i);
 				String typeQuestion = req.getParameter("typeQuestion" + i);
 				String nbrepontxt = req.getParameter("numberAnswer" + i);
-				String categorie = req.getParameter("categorie" +i);
-		
+				String categorie = req.getParameter("categorie" + i);
 
 				int nbreponse = Integer.parseInt(nbrepontxt);
 
@@ -80,16 +78,13 @@ public class FormCreatorServlet extends HttpServlet {
 				question.setReponses(reponses);
 				liste.put(enonce, question);
 				ofy().save().entity(question);
-
 			}
 			form.setMap(liste);
+			form.setNbquestions(liste.size());
 			ofy().save().entity(form).now();
 
-			
-
-			resp.sendRedirect("/panel");
+			resp.sendRedirect("/panel/" + form.getId());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

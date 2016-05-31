@@ -23,14 +23,7 @@ public class ResultServlet extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			
-			StringBuffer url = req.getRequestURL();
-			String uri = req.getRequestURI();
-			String ctx = req.getContextPath();
-			String base = url.substring(0, url.length() - uri.length() + ctx.length()) + "/";
-			
-			System.out.println(base);
+		try {	
 			
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
 					.filter("rank", ofy().load().type(Form.class).list().size()).list();

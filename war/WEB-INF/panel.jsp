@@ -6,6 +6,7 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.StringTokenizer"%>
 
 <%@ page import="guestbookobjectify.CompomentServlet"%>
 <%@ page import="guestbookobjectify.*"%>
@@ -23,14 +24,21 @@
 
 
 	<%
+		String uri = (String) request.getAttribute("IDForm");
 		List<Form> forms = (List<Form>) request.getAttribute("form");
-		Form lastElement = forms.get(forms.size() - 1);
+		Form lastElement = new Form();
+		for (Form form : forms) {
+			if (form.getId().toString().equalsIgnoreCase(uri)) {
+				lastElement = form;
+				break;
+			}
+		}
 		Compoment c = new Compoment();
 	%>
 	<form method="post">
-		
-			<%=c.Panel(lastElement)%>
-	
+
+		<%=c.Panel(lastElement)%>
+
 		<input type="submit" />
 	</form>
 

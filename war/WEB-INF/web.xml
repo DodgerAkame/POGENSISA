@@ -29,7 +29,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Panel</servlet-name>
-		<url-pattern>/panel</url-pattern>
+		<url-pattern>/panel/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
