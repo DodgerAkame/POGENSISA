@@ -40,8 +40,9 @@
 	<form method="post">
 
 		<%=c.Panel(lastElement)%>
-
-		<input type="submit" />
+		
+		<a href="/results/<%=lastElement.getId()%>" >
+		<input type="submit" /></a>
 	</form>
 	<%
 		} else {

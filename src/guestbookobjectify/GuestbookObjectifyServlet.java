@@ -4,6 +4,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.VoidWork;
 
 @SuppressWarnings("serial")
 public class GuestbookObjectifyServlet extends HttpServlet {
@@ -21,7 +23,7 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 		ObjectifyService.register(Reponse.class);
 	}
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 			req.setAttribute("form", forms);
@@ -35,18 +37,58 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			String action = req.getParameter("action");
+
+			if (action.equals("Créer")) {
+
+				List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+
+				String name = req.getParameter("nameform");
+				Form form = new Form(name, forms.size() + 1);
+
+				String nb = req.getParameter("nbquestion");
+				form.setNbquestions(Integer.valueOf(nb));
+
+				ofy().save().entity(form).now();
+
+				resp.sendRedirect("/formcreator");
+			} else if (action.equals("Mettre à jour")) {
+
+				List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+
+				if (req.getParameterValues("Open") != null) {
+					String[] checked = req.getParameterValues("Open");
+
+					for (Form form : forms) {
+						for (int i = 0; i < checked.length; i++) {
+							
+							if (form.getId().toString().equals(checked[i])){
+								form.setOpened(true);
+								break;
+							}
+							
+							if (i == checked.length - 1)
+								form.setOpened(false);
+						}
+					}
+
+				}
+
+				for (Form form : forms){
+					ofy().save().entity(form).now();
+				}
+				
+				resp.sendRedirect("/");
+			}
 			
-			String name = req.getParameter("nameform");
-			Form form = new Form(name, forms.size() + 1);
-
-			String nb = req.getParameter("nbquestion");
-			form.setNbquestions(Integer.valueOf(nb));
-
-			ofy().save().entity(form).now();
-
-			resp.sendRedirect("/formcreator"); 
+			else if (action.matches("redirection/[0-9]*")){
 			
+				StringTokenizer st = new StringTokenizer(action, "/");
+				st.nextToken();
+				
+				resp.sendRedirect("/results/" + st.nextToken().trim());
+				
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

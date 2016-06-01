@@ -26,7 +26,7 @@
 		List<Question> qs = (List<Question>) request.getAttribute("question");
 		List<String> cat = (List<String>) request.getAttribute("categorie");
 	%>
-	<form method="post" action="">
+	<form method="delete" action="">
 		
 <fieldset>
 
@@ -36,10 +36,24 @@
 Compoment c = new Compoment(); 
 %>
 <%= c.WriteSelect(cat) %>
-<%= c.Button("send") %>
-</fieldset>
-</form>
+<input type="button" value="find" onClick="show();">
 
+<div id="hide" style="visibility: hidden;">
+<% 
+		String p = request.getParameter("cate");
+		List<Question> toto = new ArrayList<Question>();
+		for(Question q : qs){
+			if(p == q.getCategorie())
+				toto.add(q);
+		}
+		%>
+		<%= c.PanelQ(toto) %>
+</div>
+
+</fieldset>
+<%= c.Button("suprimer") %>
+</form>
+<div id="create" style="visibility: visible;">
 	<form method="post" action="">
 		<div name="question">
 			<h2>
@@ -86,13 +100,13 @@ Compoment c = new Compoment();
 
 
 
-		</di1v>
+		</div>
 
 
 <a href="/creation"> <input type="submit" />
 		</a>
 </form>
-
+</div>
 
 		<script type="text/javascript">
 		
@@ -105,15 +119,29 @@ Compoment c = new Compoment();
 		
 		
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="reponse"/><br>';
+		extra.innerHTML = '<input type="text" name="reponse"/><br>';
 		document.getElementById('extra').appendChild(extra);
 		document.getElementById("numberAnswer").value = parseInt(nb) + 1;
 		
 	}
 	function addCat(){
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="cat"/><br>';
+		extra.innerHTML = '<input type="text" name="cat"/><br>';
 		document.getElementById('cat').appendChild(extra);
+	}
+	
+	function show(){
+		document.getElementById('hide').style.visibility="visible";
+		var selectElmt = document.getElementById("select");
+		var v = selectElmt.options[selectElmt.selectedIndex].value;
+		document.getElementById('hide').innerHTML='<input type="text" value="'+v+'" name="cate"/>';
+		
+		var s="<%=toto%>"; 
+		   var x="<%=qs%>";
+		   alert(s);
+		   alert(x);
+		window.reload();
+		window.location.reload();
 	}
 	
 </script>

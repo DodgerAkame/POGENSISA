@@ -29,11 +29,12 @@ public class ResultServlet extends HttpServlet {
 			String uri = req.getRequestURI();
 			StringTokenizer st = new StringTokenizer(uri, "/");
 			st.nextToken();
+			String url = st.nextToken().trim();
 
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 			Form form = new Form();
-			for (Form buffer : forms){
-				if (buffer.getId().toString().equals(uri)){
+			for (Form buffer : forms) {
+				if (buffer.getId().toString().equals(url)) {
 					form = buffer;
 					break;
 				}
@@ -41,6 +42,7 @@ public class ResultServlet extends HttpServlet {
 
 			List<User> users = (List<User>) ofy().load().type(User.class).filter("idForm", form.getId()).list();
 
+			req.setAttribute("IDFormResult", url);
 			req.setAttribute("formResult", form);
 			req.setAttribute("users", users);
 

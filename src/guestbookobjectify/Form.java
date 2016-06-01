@@ -126,6 +126,7 @@ public class Form {
 
 	public void setOpened(boolean isOpened) {
 		this.isOpened = isOpened;
+		System.out.println("C'est bon");
 	}
 
 	public int getUsersAnswered() {

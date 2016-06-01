@@ -53,7 +53,12 @@ public class CruditeServlet extends HttpServlet {
 				String enonce = req.getParameter("titreQuestion");
 				String typeQuestion = req.getParameter("typeQuestion");
 				String nbrepontxt = req.getParameter("numberAnswer");
-				String categorie = req.getParameter("select");
+				String categorie = "";
+					if (req.getParameter("cat") != null){
+						categorie = req.getParameter("cat");
+					}else {
+						categorie = req.getParameter("select");
+					}
 				System.out.println(categorie);
 				int nbreponse = Integer.parseInt(nbrepontxt);
 
@@ -76,5 +81,10 @@ public class CruditeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
+	public void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+	}
+	
+	public void doTrace(HttpServletRequest req, HttpServletResponse resp) {
+		
+	}
 }

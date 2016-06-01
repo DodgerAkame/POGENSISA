@@ -26,7 +26,7 @@
 	<%
 		String uri = (String) request.getAttribute("IDFormResult");
 		Form form = (Form) request.getAttribute("formResult");
-		List<User> users = (List<User>) request.getAttribute("users");		
+		List<User> users = (List<User>) request.getAttribute("users");
 		form.setUsersAnswered(users.size());
 	%>
 
@@ -37,9 +37,9 @@
 		personnes
 	</p>
 	<%
-	if (!form.isOpened()){
-		for (int i = 0; i < form.getNbquestions(); i++) {
-			Question qs = form.getListe().get(i);
+		if (!form.isOpened()) {
+			for (int i = 0; i < form.getNbquestions(); i++) {
+				Question qs = form.getListe().get(i);
 	%>
 
 	<h2><%=qs.getEnonce()%></h2>
@@ -51,24 +51,24 @@
 	<div name="reponses<%=i%>">
 		<%
 			if (qs.getQuestion().toString() != "text") {
-					for (int j = 0; j < qs.getReponses().size(); j++) {
+						for (int j = 0; j < qs.getReponses().size(); j++) {
 		%>
 		<p><%=qs.getReponses().get(j).getReponse()%>
 			&nbsp; &nbsp; &nbsp;
 			<%
 				for (User user : users) {
 
-								Reponse rep = user.getReponses().get(qs.getEnonce());
-								StringTokenizer st = new StringTokenizer(rep.getReponse(), " | ");
+									Reponse rep = user.getReponses().get(qs.getEnonce());
+									StringTokenizer st = new StringTokenizer(rep.getReponse(), " | ");
 
-								while (st.hasMoreTokens()) {
-									String stbuff = st.nextToken().toString();
-									if (stbuff.equals(qs.getReponses().get(j).getReponse()))
-										qs.getReponses().get(j).incrEffectif();
+									while (st.hasMoreTokens()) {
+										String stbuff = st.nextToken().toString();
+										if (stbuff.equals(qs.getReponses().get(j).getReponse()))
+											qs.getReponses().get(j).incrEffectif();
+
+									}
 
 								}
-
-							}
 			%><%=(qs.getReponses().get(j).getEffectif() / form.getUsersAnswered()) * 100%>
 			%
 			<%-- On affiche ici --%>
@@ -76,7 +76,7 @@
 		<br>
 		<%
 			}
-				} else {
+					} else {
 		%><button type="button"
 			onClick="document.getElementById('text<%=i%>').style.display='inline-block';">Afficher
 			les réponses</button>
@@ -104,11 +104,12 @@
 
 	<%
 		}
-	} else {
-		%>
-		<b>Le questionnaire est en cours, veuillez attendre la clôture du questionnaire</b>
-		<%
-	}
+		} else {
+	%>
+	<b>Le questionnaire est en cours, veuillez attendre la clôture du
+		questionnaire</b>
+	<%
+		}
 	%>
 
 
