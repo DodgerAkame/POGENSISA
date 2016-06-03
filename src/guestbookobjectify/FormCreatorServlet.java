@@ -23,8 +23,7 @@ public class FormCreatorServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-					.filter("rank", ofy().load().type(Form.class).list().size()).list();
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 			req.setAttribute("form", forms);
 
 			this.getServletContext().getRequestDispatcher("/WEB-INF/displayForm.jsp").forward(req, resp);
@@ -43,25 +42,22 @@ public class FormCreatorServlet extends HttpServlet {
 
 			for (int i = 0; i < form.getNbquestions(); i++) {
 				String enonce = req.getParameter("titreQuestion" + i);
-				String typeQuestion = req.getParameter("typeQuestion" + i);
-				String nbrepontxt = req.getParameter("numberAnswer" + i);
-				System.out.println(nbrepontxt);
-
-				int nbreponse = Integer.parseInt(nbrepontxt);
+				String typeQuestion = req.getParameter("typeQuestion");
 
 				Question question = new Question(enonce, typeQuestion);
-				question.setNbreponses(nbreponse);
 
-				List<Reponse> reponses = new ArrayList<Reponse>();
-				for (int j = 0; j < nbreponse; j++) {
-					String reponse = req.getParameter(i + "reponse" + j);
-					Reponse rep = new Reponse(reponse);
-					reponses.add(rep);
-				}
-
-				question.setReponses(reponses);
 				ofy().save().entity(question);
+				/*
+				 * List<Reponse> bufferReponse = new ArrayList<Reponse>(); for
+				 * (int j = 0; j < nb; j++) { String reponse =
+				 * req.getParameter(i + "reponse" + j); Reponse rep = new
+				 * Reponse(reponse);
+				 * 
+				 * bufferReponse.add(rep); }
+				 */
 
+				// question.setReponses(bufferReponse);
+				
 			}
 
 			resp.sendRedirect("/panel");

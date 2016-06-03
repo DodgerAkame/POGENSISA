@@ -9,27 +9,14 @@ public class Compoment {
 
 	public Compoment(){}
 	
-public String PanelQ(List<Question> qs){
-		
-		String S = "";
-		List<Question> question = qs;
-		int i = 0;
-		for(Question q : question){
-				S = S+WritecheckBox(q.getEnonce(),i);
-				i++;
-		}
-		return S;
-	}
-
-	public String Panel(Form key){
+	
+	public String Panel(Form key, List<Question> qs){
 		Form form = key;
-		String S = "<h1>"+form.getName()+"</h1>";
+		String S = form.getName();
 		String C = "";
 		String T = "Formulaire";
 		
-		Map<String,Question> question = form.getMap();
-		for (Entry<String, Question> e : question.entrySet()){
-			Question q = e.getValue();
+		for (Question q : qs){
 			T =  q.getEnonce();
 			if(q.getQuestion()== "checkbox"){
 				int i = 1;
@@ -56,9 +43,7 @@ public String PanelQ(List<Question> qs){
 				}
 			}
 			S = S+"<form class=\"form-horizontal\">"+"\n"+
-					"<fieldset>"+"\n"+"<!-- Form Name -->"+"\n"+"<legend>"+T+"</legend>"+C+"</fieldset>"+"\n"+"</form>";
-			C = "";
-			System.out.println("hhee");					
+					"<fieldset>"+"\n"+"<!-- Form Name -->"+"\n"+"<legend>"+T+"</legend>"+C+"</fieldset>"+"\n"+"</form>";				
 		}
 		return S;
 	}

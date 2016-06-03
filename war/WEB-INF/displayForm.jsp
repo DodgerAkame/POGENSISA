@@ -22,7 +22,7 @@
 <body>
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("form");
-		Form form = forms.get(forms.size() - 1);
+		for (Form form : forms) {
 	%>
 
 
@@ -34,7 +34,7 @@
 
 	<%
 		for (int i = 0; i < form.getNbquestions(); i++) {
-			qs.addQuestion(i, new Question());
+				qs.addQuestion(i, new Question());
 	%>
 	<form method="post" action="">
 		<div name="question<%=i%>">
@@ -46,11 +46,10 @@
 
 			<div>
 				<p>Type de réponse</p>
-				<label>Checkbox<input type="radio" name="typeQuestion<%=i%>"
+				<label>Checkbox<input type="radio" name="typeQuestion"
 					value="checkbox"></label> <br> <label>Bouton Radio<input
-					type="radio" name="typeQuestion<%=i%>" value="radio"></label> <br>
-				<label>Champ de Texte<input type="radio"
-					name="typeQuestion<%=i%>" value="text">
+					type="radio" name="typeQuestion" value="radio"></label> <br> <label>Champ
+					de Texte<input type="radio" name="typeQuestion" value="text_area">
 				</label>
 			</div>
 
@@ -58,45 +57,43 @@
 			<div>
 				<p>Réponses</p>
 
-				<label><input type="text" name="<%=i%>reponse0" /></label><br>
+				<label><input type="text" name="reponse0" /></label><br>
 				<div id="extra<%=i%>"></div>
 				<label><input type="button" onclick="addField(<%=i%>);"
 					value="Ajouter une réponse" /></label>
 			</div>
-			<label><input type="hidden" value="1" id="numberAnswer<%=i%>" name="numberAnswer<%=i%>"></label>
 
 
 
 		</div>
 
+		<a href="/panel"> <input type="submit" />
+		</a>
 
+	</form>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 
 	function addField(i) {
 		
 		var num = parseInt(i);
-<%-- 		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>; --%>
-		var nb = document.getElementById("numberAnswer" + num).value;
-		
+		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>;
 		
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="'+ num +'reponse'+ nb +'"/><br>';
+		extra.innerHTML = '<input type "text" name="reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
-		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
+		<%qs.getQuestionIndex(i).incrNbReponse();%>
+		alert(<%=qs.getQuestionIndex(i).getNbreponses()%>);
 		
 	}
 	
 </script>
 
 
-		<%
-			}
-		%>
-
-		<a href="/panel"> <input type="submit" />
-		</a>
-	</form>
+	<%
+		}
+		}
+	%>
 
 </body>
 </html>

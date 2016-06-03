@@ -16,7 +16,7 @@ public class Question {
 
 	@Id
 	Long id;
-	long range = 123456789L;
+	long range = 1234567L;
 
 	@Parent
 	Key<Form> parent;
@@ -46,14 +46,20 @@ public class Question {
 
 		this.parent = Key.create(Form.class, this.id);
 
-		if(questionType.equals("checkbox")){
+		switch (questionType) {
+		case "checkbox":
 			this.question = QuestionType.CHECKBOX;
-		} else if (questionType.equals("radio")) {
-			this.question = QuestionType.RADIO_BUTTON;
-		} else{
+			break;
+		case "text":
 			this.question = QuestionType.TEXT_AREA;
+			break;
+		case "radio":
+			this.question = QuestionType.RADIO_BUTTON;
+			break;
+		default:
+			this.question = QuestionType.CHECKBOX;
+			break;
 		}
-		
 
 	}
 

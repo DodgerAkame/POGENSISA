@@ -20,15 +20,12 @@
 <meta charset="utf-8" />
 </head>
 <body>
-	<%
-		List<Form> forms = (List<Form>) request.getAttribute("form");
-		Form lastElement = forms.get(forms.size() - 1);
-		Compoment c = new Compoment();
-	%>
-
-	<%=c.Panel(lastElement)%>
-	<%=lastElement.getName()%>
-	<%=lastElement.getListe()%>
-
+<%
+	List<Form> forms = (List<Form>) request.getAttribute("form");
+List<Question> q = (List<Question>) request.getAttribute("question");
+Form lastElement = forms.get(forms.size() - 1);
+Compoment c = new Compoment();
+%>
+<%= c.Panel(lastElement,q) %>
 </body>
 </html>
