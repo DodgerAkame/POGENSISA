@@ -82,7 +82,7 @@
 	function addField(i) {
 		var num = parseInt(i);
 		var extra = document.createElement('span');
-		extra.innerHTML = '<input type "text" name="reponse "><br>';
+		extra.innerHTML = '<input type="text" name="reponse " /><br>';
 	
 		document.getElementById('extra' + num).appendChild(extra);
 	

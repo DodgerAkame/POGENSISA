@@ -72,6 +72,9 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 						}
 					}
 
+				} else {
+					for (Form form : forms)
+						form.setOpened(false);
 				}
 
 				for (Form form : forms){
@@ -88,6 +91,13 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 				
 				resp.sendRedirect("/results/" + st.nextToken().trim());
 				
+			}
+			
+			else if (action.matches("reponse/[0-9]*")){
+				StringTokenizer st = new StringTokenizer(action, "/");
+				st.nextToken();
+				
+				resp.sendRedirect("/panel/" + st.nextToken().trim());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

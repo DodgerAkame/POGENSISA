@@ -34,7 +34,7 @@ public class Compoment {
 
 	public String Panel(Form key) {
 		Form form = key;
-		String S = "<h1>" + form.getName() + "</h1>\n";
+		String S = "<h2>" + form.getName() + "</h2>\n";
 		String C = "";
 		String T = "Formulaire";
 		Map<String, Question> question = form.getMap();

@@ -19,10 +19,18 @@
 <head>
 <title>Livre d'or</title>
 <meta charset="utf-8" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 
+	<div id="headercontainer">
+		<div id="header">
+			<h1>POGENSISA</h1>
+		</div>
+	</div>
 
+<div id="content">
 	<%
 		String uri = (String) request.getAttribute("IDForm");
 		List<Form> forms = (List<Form>) request.getAttribute("form");
@@ -40,19 +48,30 @@
 	<form method="post">
 
 		<%=c.Panel(lastElement)%>
-		
-		<a href="/results/<%=lastElement.getId()%>" >
-		<input type="submit" /></a>
+
+		<br>
+		<br>
+		<a href="/results/<%=lastElement.getId()%>"> <input type="submit" /></a>
 	</form>
 	<%
 		} else {
 	%>
-	<p>Le questionnaire est fermé, les résultats sont disponibles à l'adresse suivante :</p>
+	<p>Le questionnaire est fermé, les résultats sont disponibles à
+		l'adresse suivante :</p>
 	<br>
-	<p><a href="/results/<%=lastElement.getId()%>">Resultats du questionnaire</a></p>
+	<p>
+		<a href="/results/<%=lastElement.getId()%>">Resultats du
+			questionnaire</a>
+	</p>
 	<%
 		}
 	%>
+</div>
+	<div id="footer">
+		POGENSISA<br> Template CSS © <a
+			href="http://www.oswd.org/design/preview/id/3495/">AJ Industries
+			Australia Website Design</a>
+	</div>
 
 
 </body>

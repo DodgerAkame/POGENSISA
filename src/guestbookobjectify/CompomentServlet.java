@@ -43,10 +43,20 @@ public class CompomentServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			Form form = forms.get(forms.size() - 1);
+			String uri = req.getRequestURI();
+			StringTokenizer st = new StringTokenizer(uri,"/");
+			st.nextToken();
+			String buffertxt = st.nextToken().trim();
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			Form form = new Form();
 			Map<String, Reponse> userReponse = new HashMap<String, Reponse>();
+			for (Form buffer : forms) {
+				if (buffer.getId().toString().equals(buffertxt)) {
+					form = buffer;
+					break;
+				}
+			}
+			
 
 			for (int i = 0; i < form.getNbquestions(); i++) {
 				List<Question> listeQs = form.getListe();

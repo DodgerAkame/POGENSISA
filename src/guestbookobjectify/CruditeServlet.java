@@ -29,7 +29,7 @@ public class CruditeServlet extends HttpServlet {
 		req.setAttribute("form", forms);
 		req.setAttribute("question", qs);
 		List<String> cat = new ArrayList<String>();
-		cat.add("");
+		cat.add("default");
 		for(Question q : qs){			
 				if(cat.contains(q.getCategorie()) == false){
 			cat.add(q.getCategorie());
@@ -53,7 +53,7 @@ public class CruditeServlet extends HttpServlet {
 				String enonce = req.getParameter("titreQuestion");
 				String typeQuestion = req.getParameter("typeQuestion");
 				String nbrepontxt = req.getParameter("numberAnswer");
-				String categorie = "";
+				String categorie = "default";
 					if (req.getParameter("cat") != null){
 						categorie = req.getParameter("cat");
 					}else {

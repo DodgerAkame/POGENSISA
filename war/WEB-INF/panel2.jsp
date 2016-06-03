@@ -18,14 +18,34 @@
 <head>
 <title>Livre d'or</title>
 <meta charset="utf-8" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-	<%
-		Form forms = (Form) request.getAttribute("form");
-		Compoment c = new Compoment();
-	%>
 
-	<%=c.Panel(forms)%>
+	<div id="headercontainer">
+		<div id="header">
+			<h1>POGENSISA</h1>
+		</div>
+	</div>
+
+	<div id="content">
+		<%
+			Form forms = (Form) request.getAttribute("form");
+			Compoment c = new Compoment();
+		%>
+
+		<%=c.Panel(forms)%>
+
+	</div>
+
+
+	<div id="footer">
+		POGENSISA<br> Template CSS © <a
+			href="http://www.oswd.org/design/preview/id/3495/">AJ Industries
+			Australia Website Design</a>
+	</div>
 
 </body>
+
 </html>

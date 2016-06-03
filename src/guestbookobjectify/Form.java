@@ -37,7 +37,7 @@ public class Form {
 		Calendar cal = Calendar.getInstance();
 		this.date = dateFormat.format(cal.getTime());
 		this.rank = i;
-		this.isOpened = false;
+		this.isOpened = true;
 		this.usersAnswered = 0;
 	}
 
@@ -126,7 +126,6 @@ public class Form {
 
 	public void setOpened(boolean isOpened) {
 		this.isOpened = isOpened;
-		System.out.println("C'est bon");
 	}
 
 	public int getUsersAnswered() {
