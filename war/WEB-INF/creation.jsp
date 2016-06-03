@@ -60,7 +60,7 @@
 				</div>
 
 			</fieldset>
-			<%=c.Button("suprimer")%>
+			<%=c.Button("Supprimer")%>
 		</form>
 		<div id="create" style="visibility: visible;">
 			<form method="post" action="">
@@ -120,14 +120,12 @@
 		
 		
 	function addField() {
-		
-<%-- 		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>; --%>
-<%-- 		var nb = document.getElementById("numberAnswer").value; --%>
-		
-		
+
+		var nb = document.getElementById("numberAnswer").value;
 		var extra = document.createElement('label');
 		extra.innerHTML = '<input type="text" name="reponse"/><br>';
 		document.getElementById('extra').appendChild(extra);
+		alert(document.getElementById("numberAnswer").value);
 		document.getElementById("numberAnswer").value = parseInt(nb) + 1;
 		
 	}
