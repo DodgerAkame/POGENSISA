@@ -5,6 +5,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,12 +25,24 @@ public class ResultServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			Form form = forms.get(forms.size() - 1);
-			
+
+			String uri = req.getRequestURI();
+			StringTokenizer st = new StringTokenizer(uri, "/");
+			st.nextToken();
+			String url = st.nextToken().trim();
+
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			Form form = new Form();
+			for (Form buffer : forms) {
+				if (buffer.getId().toString().equals(url)) {
+					form = buffer;
+					break;
+				}
+			}
+
 			List<User> users = (List<User>) ofy().load().type(User.class).filter("idForm", form.getId()).list();
-			
+
+			req.setAttribute("IDFormResult", url);
 			req.setAttribute("formResult", form);
 			req.setAttribute("users", users);
 
@@ -40,6 +53,5 @@ public class ResultServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 
 }

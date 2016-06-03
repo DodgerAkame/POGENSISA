@@ -37,7 +37,7 @@ public class Form {
 		Calendar cal = Calendar.getInstance();
 		this.date = dateFormat.format(cal.getTime());
 		this.rank = i;
-		this.isOpened = false;
+		this.isOpened = true;
 		this.usersAnswered = 0;
 	}
 
@@ -57,9 +57,9 @@ public class Form {
 		this.rank = rank;
 	}
 
-	public void addQuestion(String enonce, String questionType) {
+	public void addQuestion(String enonce, String questionType, String categorie) {
 		Key<Form> form = Key.create(Form.class, id);
-		liste.put(enonce, new Question(enonce, questionType));
+		liste.put(enonce, new Question(enonce, questionType, categorie));
 		nbquestions++;
 	}
 

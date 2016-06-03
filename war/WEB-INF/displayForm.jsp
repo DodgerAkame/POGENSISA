@@ -1,7 +1,8 @@
+<%@page import="java.util.StringTokenizer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.google.appengine.api.datastore.*"%>
-<%@ page import="static com.googlecode.objectify.ObjectifyService.ofy" %>
+<%@ page import="static com.googlecode.objectify.ObjectifyService.ofy"%>
 
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
@@ -19,18 +20,29 @@
 <head>
 <title>POGENSISA</title>
 <meta charset="utf-8" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
+
+	<div id="headercontainer">
+		<div id="header">
+			<h1>POGENSISA</h1>
+		</div>
+	</div>
+
+<div id="content">
 	<%
 		List<Form> forms = (List<Form>) request.getAttribute("formfilter");
 		Form form = forms.get(forms.size() - 1);
+		List<Question> question = (List<Question>) request.getAttribute("question");
 	%>
 
 
 
-	<h1>
+	<h2>
 		<%=form.getName()%>
-	</h1>
+	</h2>
 	<%!ListeQuestion qs = new ListeQuestion();%>
 
 	<%
@@ -38,20 +50,24 @@
 			qs.addQuestion(i, new Question());
 			qs.getMap().get(i).setNbreponses(1);
 	%>
+
 	<form method="post" action="">
 		<div name="question<%=i%>">
-			<h2>
+			<h3>
 				<label>Enoncé de la question :<input type="text"
 					name="titreQuestion<%=i%>" value="Enoncé" /></label>
-			</h2>
-
+			</h3>
+			<p>
+				<label>Categorie de la question :<input type="text"
+					name="categorie<%=i%>" value="categorie" /></label>
+			</p>
 
 			<div>
 				<p>Type de réponse</p>
 				<label>Checkbox<input type="radio" name="typeQuestion<%=i%>"
-					value="checkbox" checked></label> <br> <label>Bouton Radio<input
-					type="radio" name="typeQuestion<%=i%>" value="radio"></label> <br>
-				<label>Champ de Texte<input type="radio"
+					value="checkbox" checked></label> <br> <label>Bouton
+					Radio<input type="radio" name="typeQuestion<%=i%>" value="radio">
+				</label> <br> <label>Champ de Texte<input type="radio"
 					name="typeQuestion<%=i%>" value="text">
 				</label>
 			</div>
@@ -65,7 +81,8 @@
 				<label><input type="button" onclick="addField(<%=i%>);"
 					value="Ajouter une réponse" /></label>
 			</div>
-			<label><input type="hidden" value="1" id="numberAnswer<%=i%>" name="numberAnswer<%=i%>"></label>
+			<label><input type="hidden" value="1" id="numberAnswer<%=i%>"
+				name="numberAnswer<%=i%>"></label>
 
 
 
@@ -83,7 +100,7 @@
 		
 		
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type "text" name="'+ num +'reponse'+ nb +'"/><br>';
+		extra.innerHTML = '<input type="text" name="'+ num +'reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
 		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
 		
@@ -96,9 +113,29 @@
 			}
 		%>
 
-		<a href="/panel"> <input type="submit" />
+		<fieldset>
+
+			<!-- Form Name -->
+			<legend>Question déjà crée</legend>
+			<%
+				Compoment c = new Compoment();
+			%>
+			<%=c.PanelQ(question)%>
+
+
+		</fieldset>
+		<input type="submit" />
 		</a>
 	</form>
+
+</div>
+
+	<div id="footer">
+		POGENSISA<br> Template CSS © <a
+			href="http://www.oswd.org/design/preview/id/3495/">AJ Industries
+			Australia Website Design</a>
+	</div>
+
 
 </body>
 </html>

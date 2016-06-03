@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,9 +26,11 @@ public class CompomentServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			// Form lastElement = forms.get(forms.size() - 1);
+			String uri = req.getRequestURI();
+			StringTokenizer st = new StringTokenizer(uri,"/");
+			st.nextToken();
+			req.setAttribute("IDForm",st.nextToken().toString());
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 			req.setAttribute("form", forms);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(req, resp);
 
@@ -40,10 +43,20 @@ public class CompomentServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-					.filter("rank", ofy().load().type(Form.class).list().size()).list();
-			Form form = forms.get(forms.size() - 1);
+			String uri = req.getRequestURI();
+			StringTokenizer st = new StringTokenizer(uri,"/");
+			st.nextToken();
+			String buffertxt = st.nextToken().trim();
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
+			Form form = new Form();
 			Map<String, Reponse> userReponse = new HashMap<String, Reponse>();
+			for (Form buffer : forms) {
+				if (buffer.getId().toString().equals(buffertxt)) {
+					form = buffer;
+					break;
+				}
+			}
+			
 
 			for (int i = 0; i < form.getNbquestions(); i++) {
 				List<Question> listeQs = form.getListe();
@@ -81,12 +94,12 @@ public class CompomentServlet extends HttpServlet {
 			}
 
 			User user = new User();
-			user.setIdForm(form.getId()); //Stocker l'ID du formulaire
+			user.setIdForm(form.getId()); // Stocker l'ID du formulaire
 			user.setReponses(userReponse);
 
 			ofy().save().entity(user).now();
 
-			resp.sendRedirect("/results");
+			resp.sendRedirect("/results/" + form.getId());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
