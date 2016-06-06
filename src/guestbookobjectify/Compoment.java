@@ -60,7 +60,7 @@ public class Compoment {
 		List<Question> question = qs;
 		int i = 0;
 		for(Question q : question){
-				S = S+WritecheckBox(q.getEnonce(),i,1)+"   nombre de réponse :"+q.getNbreponses();
+				S = S+WritecheckBox(q.getEnonce(),i,1)+"   nombre de rÃ©ponse :"+q.getNbreponses();
 				i++;
 		}
 		return S;
@@ -100,7 +100,7 @@ public class Compoment {
 			if(q.getQuestion()=="text"){
 				List<Reponse> reponses = q.getReponses();
 				for(Reponse r : reponses){
-					C = C+textArea(r.getReponse());
+					C = C+textArea(r.getReponse(),indexqs);
 				}
 			}
 			S = S+"<div class=\"form-horizontal\">"+"\n"+

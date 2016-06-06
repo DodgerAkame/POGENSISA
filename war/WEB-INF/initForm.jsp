@@ -49,19 +49,8 @@
 		%>
 
 		<form method="post" onSubmit="window.location.reload()">
-			<p>
-				<label><h1>Titre du formulaire</h1> <input type="text"
-					name="nameform" /></label>
-			</p>
-
-			<p>
-				<label>Combien de questions ? <br> <input type="number"
-					name="nbquestion" /></label>
-			</p>
-
-			<a href="/formcreator"> <input type="submit" name="action"
-				value="Créer" class="btn btn-primary" />
-			</a>
+			<input type="submit" name="action" value="Créer"
+				class="btn btn-primary" /> </a>
 		</form>
 
 		<br> <br> <a href="/crud">CRUD</a> <br> <br>
