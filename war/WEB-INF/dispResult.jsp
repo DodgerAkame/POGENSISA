@@ -68,10 +68,10 @@
 					for (User user : users) {
 
 										Reponse rep = user.getReponses().get(qs.getEnonce());
-										StringTokenizer st = new StringTokenizer(rep.getReponse(), " | ");
-
+										StringTokenizer st = new StringTokenizer(rep.getReponse(), "|");
 										while (st.hasMoreTokens()) {
 											String stbuff = st.nextToken().toString();
+											
 											if (stbuff.equals(qs.getReponses().get(j).getReponse()))
 												qs.getReponses().get(j).incrEffectif();
 

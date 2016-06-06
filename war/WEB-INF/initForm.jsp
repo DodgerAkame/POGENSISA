@@ -2,8 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.google.appengine.api.datastore.*"%>
 <%@ page import="java.util.List"%>
-<%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
 <%@ page import="guestbookobjectify.*"%>
+<%@ page import="com.google.appengine.api.users.*"%>
+
+<%
+	UserService userService = UserServiceFactory.getUserService();
+%>
 
 <!DOCTYPE html>
 
@@ -22,7 +26,28 @@
 </div>
 
 <body>
+
 	<div id="content">
+		<%
+			if (userService.getCurrentUser() == null) {
+		%>
+		<p>
+			<a href="<%=userService.createLoginURL("/")%>">Se connecter</a>
+		</p>
+		<%
+			} else {
+		%>
+		<p>
+			Bonjour
+			<%=userService.getCurrentUser().getNickname()%></p>
+
+		<p>
+			<a href="<%=userService.createLogoutURL("/")%>">Se déconnecter</a>
+		</p>
+		<%
+			}
+		%>
+
 		<form method="post" onSubmit="window.location.reload()">
 			<p>
 				<label><h1>Titre du formulaire</h1> <input type="text"
@@ -35,11 +60,11 @@
 			</p>
 
 			<a href="/formcreator"> <input type="submit" name="action"
-				value="Créer" />
+				value="Créer" class="btn btn-primary" />
 			</a>
 		</form>
 
-		<br> <br> <a href="/creation">CRUD</a> <br> <br>
+		<br> <br> <a href="/crud">CRUD</a> <br> <br>
 
 
 		<form method="post">

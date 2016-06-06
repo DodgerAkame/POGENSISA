@@ -81,10 +81,4 @@ public class CruditeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	public void doDelete(HttpServletRequest req, HttpServletResponse resp) {
-	}
-	
-	public void doTrace(HttpServletRequest req, HttpServletResponse resp) {
-		
-	}
 }

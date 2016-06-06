@@ -1,5 +1,8 @@
 package guestbookobjectify;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -10,6 +13,7 @@ public class Histo {
 	Long id;
 	
 	private String name = "";
+	private List<Question> question = new ArrayList<Question>();
 	@Index
 	private int rang = 0;
 	
@@ -36,5 +40,13 @@ public class Histo {
 
 	public void setRang(int rang) {
 		this.rang = rang;
+	}
+
+	public List<Question> getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(List<Question> question) {
+		this.question = question;
 	}
 }

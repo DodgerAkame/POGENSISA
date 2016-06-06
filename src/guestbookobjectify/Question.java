@@ -1,5 +1,7 @@
 package guestbookobjectify;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +34,6 @@ public class Question {
 	public Question() {
 		Random r = new Random();
 		id = (long) (r.nextDouble() * range);
-
 		setCategorie("");
 		enonce = "";
 		question = QuestionType.CHECKBOX;
@@ -47,13 +48,14 @@ public class Question {
 
 		this.parent = Key.create(Form.class, this.id);
 
-		if (questionType.equals("checkbox")) {
+		if(questionType.equals("checkbox")){
 			this.question = QuestionType.CHECKBOX;
 		} else if (questionType.equals("radio")) {
 			this.question = QuestionType.RADIO_BUTTON;
-		} else {
+		} else{
 			this.question = QuestionType.TEXT_AREA;
 		}
+		
 
 	}
 
@@ -85,8 +87,14 @@ public class Question {
 		return S;
 	}
 
-	public void setQuestion(QuestionType question) {
-		this.question = question;
+	public void setQuestion(String question) {
+		if (question.equals("checkbox")) {
+			this.question = QuestionType.CHECKBOX;
+		} else if (question.equals("radio")) {
+			this.question = QuestionType.RADIO_BUTTON;
+		} else if (question.equals("checkbox")) {
+			this.question = QuestionType.TEXT_AREA;
+		}
 	}
 
 	public int getNbreponses() {

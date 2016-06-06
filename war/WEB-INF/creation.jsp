@@ -35,33 +35,8 @@
 			List<Form> forms = (List<Form>) request.getAttribute("formhistorique");
 			List<Question> qs = (List<Question>) request.getAttribute("question");
 			List<String> cat = (List<String>) request.getAttribute("categorie");
+			Compoment c= new Compoment();
 		%>
-		<form method="delete" action="">
-
-			<fieldset>
-
-				<!-- Form Name -->
-				<legend>List Question</legend>
-				<%
-					Compoment c = new Compoment();
-				%>
-				<%=c.WriteSelect(cat)%>
-				<input type="button" value="find" onClick="show();">
-
-				<div id="hide" style="visibility: visible;">
-					<%
-						String p = request.getParameter("cate");
-						List<Question> toto = new ArrayList<Question>();
-						for (Question q : qs) {
-							if (p == q.getCategorie())
-								toto.add(q);
-						}
-					%>
-				</div>
-
-			</fieldset>
-			<%=c.Button("Supprimer")%>
-		</form>
 		<div id="create" style="visibility: visible;">
 			<form method="post" action="">
 				<div name="question">
@@ -123,7 +98,7 @@
 
 		var nb = document.getElementById("numberAnswer").value;
 		var extra = document.createElement('label');
-		extra.innerHTML = '<input type="text" name="reponse"/><br>';
+		extra.innerHTML = '<input type="text" name="reponse'+nb+'"/><br>';
 		document.getElementById('extra').appendChild(extra);
 		alert(document.getElementById("numberAnswer").value);
 		document.getElementById("numberAnswer").value = parseInt(nb) + 1;

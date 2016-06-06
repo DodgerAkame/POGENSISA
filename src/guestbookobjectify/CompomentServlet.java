@@ -77,13 +77,13 @@ public class CompomentServlet extends HttpServlet {
 
 						for (int j = 0; j < checked.length; j++) {
 							sb.append(checked[j]);
-							sb.append(" | ");
+							sb.append("|");
 						}
 					} else if (qs.getQuestion().equals("text")) {
 						sb.append(req.getParameter("textreponse"));
 					} else {
 						sb.append(req.getParameter("radios" + l));
-						sb.append(" | ");
+						sb.append("|");
 					}
 
 					Reponse rep = new Reponse(sb.toString());

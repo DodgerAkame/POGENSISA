@@ -56,6 +56,7 @@
 						name="titreQuestion<%=i%>" value="Enoncé" /></label>
 				</h3>
 				<p>
+				
 					<label>Categorie de la question :<input type="text"
 						name="categorie<%=i%>" value="categorie" /></label>
 				</p>
@@ -92,16 +93,17 @@
 			<script type="text/javascript">
 
 	function addField(i) {
-		
 		var num = parseInt(i);
-<%-- 		var nb = <%=qs.getQuestionIndex(i).getNbreponses()%>; --%>
 		var nb = document.getElementById("numberAnswer" + num).value;
-		
 		
 		var extra = document.createElement('label');
 		extra.innerHTML = '<input type="text" name="'+ num +'reponse'+ nb +'"/><br>';
 		document.getElementById('extra' + num).appendChild(extra);
 		document.getElementById("numberAnswer" + num).value = parseInt(nb) + 1;
+		
+	}
+	
+	function addQuestion(){
 		
 	}
 	
