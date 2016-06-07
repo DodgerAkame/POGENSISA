@@ -80,7 +80,7 @@ public class CompomentServlet extends HttpServlet {
 							sb.append("|");
 						}
 					} else if (qs.getQuestion().equals("text")) {
-						sb.append(req.getParameter("textreponse"));
+						sb.append(req.getParameter("textreponse" + l));
 					} else {
 						sb.append(req.getParameter("radios" + l));
 						sb.append("|");

@@ -48,6 +48,12 @@ public class FormCreatorServlet extends HttpServlet {
 			Map<String, Question> liste = new HashMap<String, Question>();
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
 
+			String nameForm = req.getParameter("formName");
+			form.setName(nameForm);
+			
+			String nbQuestion = req.getParameter("numberQuestion");
+			form.setNbquestions(Integer.parseInt(nbQuestion));
+			
 			String[] checked;
 			
 			for (Question q : questions) {

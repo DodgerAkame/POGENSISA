@@ -20,5 +20,14 @@ public class crudServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse resp){
+		try {
+			resp.sendRedirect("/import");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

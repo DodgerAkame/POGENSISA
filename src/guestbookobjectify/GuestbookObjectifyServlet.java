@@ -43,11 +43,7 @@ public class GuestbookObjectifyServlet extends HttpServlet {
 
 				List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 
-				String name = req.getParameter("nameform");
-				Form form = new Form(name, forms.size() + 1);
-
-				String nb = req.getParameter("nbquestion");
-				form.setNbquestions(Integer.valueOf(nb));
+				Form form = new Form("", forms.size() + 1);
 
 				ofy().save().entity(form).now();
 
