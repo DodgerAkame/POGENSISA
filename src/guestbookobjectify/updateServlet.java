@@ -20,7 +20,7 @@ public class updateServlet extends HttpServlet {
 		ObjectifyService.register(Form.class);
 		ObjectifyService.register(Question.class);
 		ObjectifyService.register(Reponse.class);
-		ObjectifyService.register(Histo.class);	
+		ObjectifyService.register(Checking.class);	
 	}
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
@@ -62,10 +62,14 @@ public class updateServlet extends HttpServlet {
 		try {
 		
 			List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
-			List<Histo> listHisto = (List<Histo>) ofy().load().type(Histo.class).list();
+			List<Checking> listHisto = (List<Checking>) ofy().load().type(Checking.class).list();
+			Checking h=new Checking("default",1);
+				for(Checking f : listHisto){
+					if(f.getName().equals("default"))
+						h=f;
+				}
 			List<Question> qs = (List<Question>) ofy().load().type(Question.class).list();
 			String[] checked = req.getParameterValues("checkboxes1");
-			Histo h = new Histo();
 			List<Question> question = new ArrayList<Question>();
 			for(Question q : qs){
 				String qenonce = q.getEnonce();
@@ -75,7 +79,6 @@ public class updateServlet extends HttpServlet {
 					long check =Long.parseLong(c);
 					if(qid == check){
 							String id = Long.toString(q.getId());
-							h.setRang(listHisto.size()+1);
 							question.add(q);
 							
 						}						
