@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>Livre d'or</title>
+<title>POGENSISA</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
@@ -32,7 +32,10 @@
 
 	<div id="content">
 		<a href="/creation"> creation </a> <a href="/delete">delete </a> <a
-			href="/update">update </a>
+			href="/update">update </a> <a onclick="addFile();">Import</a>
+		<form method="post">
+			<div id="importInput"></div>
+		</form>
 	</div>
 
 	<div id="footer">
@@ -41,6 +44,27 @@
 			Australia Website Design</a>
 	</div>
 
+	<script type="text/javascript">
+		function addFile() {
+			var instruction = document.createElement("p");
+			instruction.innerHTML = 'Veuillez choisir le fichier (.txt,.csv) <br> <b>Attention, les données devront être sous la forme suivante :</b><br><i>question;type de réponse;réponse;réponse;....</i>';
+		
+
+			var input = document.createElement("input");
+			input.setAttribute("type", "file");
+			input.setAttribute("name", "inputImport");
+
+			var br = document.createElement("br");
+			
+			var postInput = document.createElement("input");
+			postInput.setAttribute("type", "submit");
+
+			document.getElementById("importInput").appendChild(instruction);
+			document.getElementById("importInput").appendChild(input);
+			document.getElementById("importInput").appendChild(br);
+			document.getElementById("importInput").appendChild(postInput);
+		}
+	</script>
 
 </body>
 </html>
