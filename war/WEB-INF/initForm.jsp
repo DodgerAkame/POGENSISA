@@ -29,9 +29,9 @@
 			<input type="submit"/>
 		</a>
 	</form>
-
+		
 	<br>
 	<br>
-
+<a href="/crud">CRUD</a>
 </body>
 </html>

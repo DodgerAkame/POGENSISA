@@ -21,12 +21,11 @@
 </head>
 <body>
 	<%
-		List<Form> forms = (List<Form>) request.getAttribute("form");
-		Form lastElement = forms.get(forms.size() - 1);
+		Form forms = (Form) request.getAttribute("form");
 		Compoment c = new Compoment();
 	%>
 
-	<%=c.Panel(lastElement)%>
+	<%=c.Panel(forms)%>
 
 </body>
 </html>

@@ -11,35 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.cmd.LoadType;
 
 public class CompomentServlet extends HttpServlet {
-	static{
+	static {
 		ObjectifyService.register(Form.class);
 		ObjectifyService.register(Question.class);
 		ObjectifyService.register(Reponse.class);
 	}
-	
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-		List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
-		Form lastElement = forms.get(forms.size()-1);
-		List<Question> qs = (List<Question>) ofy().load().type(Question.class).filter(lastElement.getName(), lastElement).list();
-		System.out.println(qs);
-		System.out.println(lastElement.getName());
-		System.out.println(lastElement.getMap());
-		req.setAttribute("form", forms);
-		req.setAttribute("question", qs);
 		try {
+
+			List<Form> forms = (List<Form>) ofy().load().type(Form.class)
+					.filter("rank", ofy().load().type(Form.class).list().size()).list();
+			//Form lastElement = forms.get(forms.size() - 1);
+			req.setAttribute("form", forms);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(req, resp);
+
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
-	
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+
+	}
+
 }
