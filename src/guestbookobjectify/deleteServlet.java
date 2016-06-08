@@ -72,13 +72,13 @@ public class deleteServlet extends HttpServlet {
 						long check =Long.parseLong(c);
 							if(qid == check){
 								ofy().delete().entity(q);
-								System.out.println(q.getEnonce()+" ");
 								for(Form f : forms){
 									for(Map.Entry<String, Question> entry : f.getMap().entrySet()){
 										Question qy = entry.getValue();
 										if(qy.getId() == qid){
 											f.removeQuestion(qy.getEnonce());
-											System.out.println("full remove");
+											ofy().load().entity(f);
+											break;
 										}
 										
 									}ofy().load().entity(f);
