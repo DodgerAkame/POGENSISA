@@ -37,11 +37,6 @@
 			List<String> cat = (List<String>) request.getAttribute("categorie");
 		%>
 		<form method="post" action="">
-
-			<fieldset>
-
-				<!-- Form Name -->
-				<legend>List Question</legend>
 				<%
 					Compoment c = new Compoment();
 				%>
@@ -49,21 +44,10 @@
 					Map<String, List<Question>> q = (Map<String, List<Question>>) request.getAttribute("haha");
 				%>
 				<%=c.PanelM(q)%>
-
-
-			</fieldset>
 			<%=c.Button("suprimer")%>
 		</form>
-	</div>
-	<script type="text/javascript">
-		function show() {
-			var selectElmt = document.getElementById("select");
-			var v = selectElmt.options[selectElmt.selectedIndex].value;
-			document.getElementById(v).style.visibility = "visible";
-
-		}
-	</script>
-
+	
+</div>
 
 	<div id="footer">
 		POGENSISA<br> Template CSS © <a

@@ -30,7 +30,7 @@ public class deleteServlet extends HttpServlet {
 			req.setAttribute("form", forms);
 			req.setAttribute("question", qs);
 			List<String> cat = new ArrayList<String>();
-			cat.add("default");
+			//cat.add("default");
 			for(Question q : qs){			
 					if(cat.contains(q.getCategorie()) == false){
 				cat.add(q.getCategorie());
