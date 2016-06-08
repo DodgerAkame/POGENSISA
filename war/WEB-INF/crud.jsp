@@ -9,7 +9,6 @@
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Iterator"%>
 
-<%@ page import="guestbookobjectify.GuestbookObjectifyServlet"%>
 <%@ page import="guestbookobjectify.*"%>
 
 
@@ -32,10 +31,13 @@
 
 	<div id="content">
 		<a href="/creation"> creation </a> <a href="/delete">delete </a> <a
-			href="/update">update </a> <a onclick="addFile();">Import</a>
+			href="/update">update </a> <br> <br> <input type="file"
+			id="fileinput" onchange='openFile(event)' />
 		<form method="post">
-			<div id="importInput"></div>
+			<div id="output"></div>
+			<input type="submit" />
 		</form>
+
 	</div>
 
 	<div id="footer">
@@ -45,26 +47,21 @@
 	</div>
 
 	<script type="text/javascript">
-		function addFile() {
-			var instruction = document.createElement("p");
-			instruction.innerHTML = 'Veuillez choisir le fichier (.txt,.csv) <br> <b>Attention, les données devront être sous la forme suivante :</b><br><i>question;type de réponse;réponse;réponse;....</i>';
-		
+		var openFile = function(event) {
+			var input = event.target;
 
-			var input = document.createElement("input");
-			input.setAttribute("type", "file");
-			input.setAttribute("name", "inputImport");
+			var reader = new FileReader();
+			reader.onload = function() {
+				var text = reader.result;
+				var node = document.getElementById('output');
+				node.innerHTML = '<input type="hidden" name="textImport" value="' + text +'" /> ';
+				//console.log(reader.result.substring(0, 200));
+			};
+			reader.readAsText(input.files[0]);
+		};
 
-			var br = document.createElement("br");
-			
-			var postInput = document.createElement("input");
-			postInput.setAttribute("type", "submit");
-
-			document.getElementById("importInput").appendChild(instruction);
-			document.getElementById("importInput").appendChild(input);
-			document.getElementById("importInput").appendChild(br);
-			document.getElementById("importInput").appendChild(postInput);
-		}
+		document.getElementById('fileinput').addEventListener('change',
+				readSingleFile, false);
 	</script>
-
 </body>
 </html>
