@@ -60,10 +60,12 @@ public class deleteServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
-		List<Form> forms = (List<Form>) ofy().load().type(Form.class)
-				.filter("rank", ofy().load().type(Form.class).list().size()).list();
+		try {
+				List<Form> forms = (List<Form>) ofy().load().type(Form.class).list();
 				List<Question> qs = (List<Question>) ofy().load().type(Question.class).list();
 				String[] checked = req.getParameterValues("checkboxes1");
+				List<Form> form = new ArrayList<Form>();
+				Map<String, Question> map = new HashMap<String, Question>();
 				for(Question q : qs){
 					String qenonce = q.getEnonce();
 					long qid = q.getId();
@@ -77,16 +79,18 @@ public class deleteServlet extends HttpServlet {
 										Question qy = entry.getValue();
 										if(qy.getId() == qid){
 											f.removeQuestion(qy.getEnonce());
-											ofy().load().entity(f);
 											break;
 										}
 										
-									}ofy().load().entity(f);
+									}
+									form.add(f);
 								}
 							}
 						}
 					}
-				try {
+				for(Form f : form){
+					ofy().save().entity(f);
+					}
 					resp.sendRedirect("/delete");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

@@ -88,13 +88,20 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>Update</servlet-name>
-		<servlet-class>guestbookobjectify.ChangeQuestionServlet</servlet-class>
+		<servlet-class>guestbookobjectify.updateServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Update</servlet-name>
 		<url-pattern>/update</url-pattern>
 	</servlet-mapping>
-
+<servlet>
+		<servlet-name>changeQuestion</servlet-name>
+		<servlet-class>guestbookobjectify.ChangeQuestionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>changeQuestion</servlet-name>
+		<url-pattern>/changeQuestion</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>guestbook.jsp</welcome-file>
 	</welcome-file-list>
