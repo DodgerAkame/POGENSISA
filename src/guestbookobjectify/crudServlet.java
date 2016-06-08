@@ -32,27 +32,42 @@ public class crudServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
-		String buffer = req.getParameter("textImport");
-		StringTokenizer retour = new StringTokenizer(buffer, "\r\n");
+		String cmd = req.getParameter("option");
 
-		while (retour.hasMoreTokens()) {
-			String ligne = retour.nextToken().toString();
-			StringTokenizer st = new StringTokenizer(ligne, ";");
+		try {
+			if (cmd.equals("import")) {
+				String buffer = req.getParameter("textImport");
+				StringTokenizer retour = new StringTokenizer(buffer, "\r\n");
 
-			String enonce = st.nextToken().toString();
-			String typeQuestion = st.nextToken().toString();
-			String categorie = st.nextToken().toString();
+				while (retour.hasMoreTokens()) {
+					String ligne = retour.nextToken().toString();
+					StringTokenizer st = new StringTokenizer(ligne, ";");
 
-			Question qs = new Question(enonce, typeQuestion, categorie);
-			List<Reponse> reponses = new ArrayList<Reponse>();
-			while (st.hasMoreTokens()) {
-				Reponse rep = new Reponse(st.nextToken().toString());
-				reponses.add(rep);
+					String enonce = st.nextToken().toString();
+					String typeQuestion = st.nextToken().toString();
+					String categorie = st.nextToken().toString();
+
+					Question qs = new Question(enonce, typeQuestion, categorie);
+					List<Reponse> reponses = new ArrayList<Reponse>();
+					while (st.hasMoreTokens()) {
+						Reponse rep = new Reponse(st.nextToken().toString());
+						reponses.add(rep);
+					}
+					qs.setReponses(reponses);
+					qs.setNbreponses(reponses.size());
+
+					ofy().save().entity(qs);
+
+					resp.sendRedirect("/");
+				}
+
+			} else if (cmd.equals("export")) {
+				resp.sendRedirect("/export");
 			}
-			qs.setReponses(reponses);
-			qs.setNbreponses(reponses.size());
 
-			ofy().save().entity(qs);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

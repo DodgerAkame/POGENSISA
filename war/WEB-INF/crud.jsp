@@ -35,7 +35,9 @@
 			id="fileinput" onchange='openFile(event)' />
 		<form method="post">
 			<div id="output"></div>
-			<input type="submit" />
+			<input name="option" type="submit" value="import" />
+			
+			<input name="option" type="submit" value="export" />
 		</form>
 
 	</div>
@@ -59,6 +61,7 @@
 			};
 			reader.readAsText(input.files[0]);
 		};
+		
 
 		document.getElementById('fileinput').addEventListener('change',
 				readSingleFile, false);
