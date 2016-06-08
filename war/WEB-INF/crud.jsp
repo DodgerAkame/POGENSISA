@@ -35,9 +35,10 @@
 			id="fileinput" onchange='openFile(event)' />
 		<form method="post">
 			<div id="output"></div>
-			<input name="option" type="submit" value="import" />
-			
-			<input name="option" type="submit" value="export" />
+			<br>
+			<input name="option" type="submit" value="Importer" />
+			<br>
+			<input name="option" type="submit" value="Exporter" />
 		</form>
 
 	</div>

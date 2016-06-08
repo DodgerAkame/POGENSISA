@@ -35,7 +35,7 @@ public class crudServlet extends HttpServlet {
 		String cmd = req.getParameter("option");
 
 		try {
-			if (cmd.equals("import")) {
+			if (cmd.equals("Importer")) {
 				String buffer = req.getParameter("textImport");
 				StringTokenizer retour = new StringTokenizer(buffer, "\r\n");
 
@@ -61,7 +61,7 @@ public class crudServlet extends HttpServlet {
 					resp.sendRedirect("/");
 				}
 
-			} else if (cmd.equals("export")) {
+			} else if (cmd.equals("Exporter")) {
 				resp.sendRedirect("/export");
 			}
 
