@@ -25,7 +25,7 @@ public class Compoment {
 		int index = 1;
 		for (Map.Entry<String, List<Question>> entry : f.entrySet()) {
 			List<Question> qs = entry.getValue();
-			String C = "<fieldset> <legend>"+entry.getKey()+"</legend><div id=\""+entry.getKey()+"\" style=\"visibility: visible;\">";
+			String C = "<fieldset> <legend>"+entry.getKey()+"</legend>";
 			int i = 0;
 			for(Question q : qs){
 				String reponse = "";
@@ -34,10 +34,10 @@ public class Compoment {
 					reponse= reponse+"&nbsp;&nbsp;R"+x+" : "+r.getReponse();
 					x++;
 				}
-				C = C + WritecheckBox2("Enonce : "+q.getEnonce()+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre de Reponse :"+q.getNbreponses()+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+reponse,q.getId(), i, index);
+				C = C + WritecheckBox2("Enonce : "+q.getEnonce()+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+reponse,q.getId(), i, index);
 				i++;
 			}
-			S = S + C + "</fieldset></div>";
+			S = S + C + "</fieldset>";
 		}
 		
 		return S;

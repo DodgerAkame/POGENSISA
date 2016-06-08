@@ -57,6 +57,7 @@ public class ChangeQuestionServlet extends HttpServlet {
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
 			List<Checking> histos = (List<Checking>) ofy().load().type(Checking.class).list();
 			Checking h = histos.get(histos.size() - 1);
+			List<Form> formx = new ArrayList<Form>();
 
 			for (int i = 0; i < form.getQuestion().size() ; i++) {
 				String qid = req.getParameter("Id"+i);
@@ -92,14 +93,16 @@ public class ChangeQuestionServlet extends HttpServlet {
 				for(Form f : toto){
 					for(Map.Entry<String, Question> entry : f.getMap().entrySet()){
 						Question qy = entry.getValue();
-						if(qy.getId()==question.getId()){
+						if(qy.getId()== Id){
 							qy.setCategorie(categorie);
 							qy.setEnonce(enonce);
 							qy.setNbreponses(nbreponse);
 							qy.setQuestion(typeQuestion);
 							qy.setReponses(reponses);
+							f.getMap().put(qy.getEnonce(), qy);
+							break;
 						}
-					}	
+					}formx.add(f);
 				}
 				question.setCategorie(categorie);
 				question.setEnonce(enonce);
@@ -110,7 +113,9 @@ public class ChangeQuestionServlet extends HttpServlet {
 
 			}
 
-			
+			for(Form f : formx){
+				ofy().save().entity(f);
+			}
 
 			resp.sendRedirect("/update");
 		} catch (IOException e) {
