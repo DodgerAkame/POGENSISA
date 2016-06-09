@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>POGENSISA</title>
+<title>Accueil</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">

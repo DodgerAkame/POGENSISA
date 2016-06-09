@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>Livre d'or</title>
+<title>Question - création</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
@@ -35,7 +35,7 @@
 			List<Form> forms = (List<Form>) request.getAttribute("formhistorique");
 			List<Question> qs = (List<Question>) request.getAttribute("question");
 			List<String> cat = (List<String>) request.getAttribute("categorie");
-			Compoment c= new Compoment();
+			Compoment c = new Compoment();
 		%>
 		<div id="create" style="visibility: visible;">
 			<form method="post" action="">
@@ -45,7 +45,7 @@
 							name="titreQuestion" value="Enoncé" /></label>
 					</h2>
 					<p>
-						<label>Categorie de la question : <%=c.WriteSelect(cat)%>
+						<label>Catégorie de la question : <%=c.WriteSelect(cat)%>
 							<input type="button" onclick="addCat();" value="+" />
 							<div id="cat"></div>
 						</label>
@@ -91,44 +91,29 @@
 		</div>
 
 		<script type="text/javascript">
-		
-		
-		
-	function addField() {
+			function addField() {
 
-		var nb = document.getElementById("numberAnswer").value;
-		var extra = document.createElement('label');
-		extra.innerHTML = '<input type="text" name="reponse'+nb+'"/><br>';
-		document.getElementById('extra').appendChild(extra);
-		alert(document.getElementById("numberAnswer").value);
-		document.getElementById("numberAnswer").value = parseInt(nb) + 1;
-		
-	}
-	function addCat(){
-		var extra = document.createElement('label');
-		extra.innerHTML = '<input type="text" name="cat"/><br>';
-		document.getElementById('cat').appendChild(extra);
-	}
-	
-	function show(){
-		alert();
-		var extra = document.createElement('label');
-		extra.innerHTML = '<input type="checkbox" name="cat"/><br>';
-		document.getElementById('cat').appendChild(extra);
-	//	document.getElementById('hide').style.visibility="visible";
-		//var selectElmt = document.getElementById("select");
-		//var v = selectElmt.options[selectElmt.selectedIndex].value;
-		//document.getElementById('hide').innerHTML='<input type="text" value="'+v+'" name="cate"/>';
-		//fonctionnement assynchrone Json web service 
-		//var s="<\%=toto%>"; 
-		//   var x="<\%=qs%>";
-		//   alert(s);
-		//   alert(x);
-		//window.reload();
-		//window.location.reload();
-	}
-	
-</script>
+				var nb = document.getElementById("numberAnswer").value;
+				var extra = document.createElement('label');
+				extra.innerHTML = '<input type="text" name="reponse'+nb+'"/><br>';
+				document.getElementById('extra').appendChild(extra);
+				alert(document.getElementById("numberAnswer").value);
+				document.getElementById("numberAnswer").value = parseInt(nb) + 1;
+
+			}
+			function addCat() {
+				var extra = document.createElement('label');
+				extra.innerHTML = '<input type="text" name="cat"/><br>';
+				document.getElementById('cat').appendChild(extra);
+			}
+
+			function show() {
+				alert();
+				var extra = document.createElement('label');
+				extra.innerHTML = '<input type="checkbox" name="cat"/><br>';
+				document.getElementById('cat').appendChild(extra);
+			}
+		</script>
 	</div>
 
 	<div id="footer">

@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>POGENSISA</title>
+<title>Résultats</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
@@ -71,7 +71,7 @@
 										StringTokenizer st = new StringTokenizer(rep.getReponse(), "|");
 										while (st.hasMoreTokens()) {
 											String stbuff = st.nextToken().toString();
-											
+
 											if (stbuff.equals(qs.getReponses().get(j).getReponse()))
 												qs.getReponses().get(j).incrEffectif();
 
@@ -111,6 +111,10 @@
 		</div>
 		<br>
 
+		<form method="post">
+			<input type="submit" value="Exporter les résultats" />
+		</form>
+
 		<%
 			}
 			} else {
@@ -121,8 +125,9 @@
 			}
 		%>
 
+
 	</div>
-	
+
 	<div id="footer">
 		POGENSISA<br> Template CSS © <a
 			href="http://www.oswd.org/design/preview/id/3495/">AJ Industries

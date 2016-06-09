@@ -3,28 +3,29 @@ package guestbookobjectify;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.googlecode.objectify.ObjectifyService;
 
-public class ResultServlet extends HttpServlet {
+public class ExportResultatServlet extends HttpServlet {
 
 	static {
 		ObjectifyService.register(Form.class);
-		ObjectifyService.register(Question.class);
-		ObjectifyService.register(Reponse.class);
 		ObjectifyService.register(User.class);
+		ObjectifyService.register(Reponse.class);
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
+			resp.setContentType("text/csv");
+			resp.setHeader("Content-Disposition", "attachment; filename=\"Resultats.csv\"");
 
 			String uri = req.getRequestURI();
 			StringTokenizer st = new StringTokenizer(uri, "/");
@@ -40,27 +41,31 @@ public class ResultServlet extends HttpServlet {
 				}
 			}
 
+			OutputStream outputStream = resp.getOutputStream();
+			StringBuffer sb = new StringBuffer();
+			sb.append(form.getName());
+			for (int i = 0; i < form.getNbquestions(); i++) {
+				sb.append(";");
+				sb.append(form.getListe().get(i).getEnonce());
+			}
+			sb.append("\r\n");
+			sb.append("\r\n");
+
 			List<User> users = (List<User>) ofy().load().type(User.class).filter("idForm", form.getId()).list();
+			for (int j = 0; j < users.size(); j++) {
+				sb.append("Réponse" + j + ":");
 
-			req.setAttribute("IDFormResult", url);
-			req.setAttribute("formResult", form);
-			req.setAttribute("users", users);
+				for (int k = 0; k < form.getNbquestions(); k++) {
+					sb.append(";");
+					sb.append(users.get(j).getReponses().get(form.getListe().get(k).getEnonce()).getReponse());
+				}
 
-			this.getServletContext().getRequestDispatcher("/WEB-INF/dispResult.jsp").forward(req, resp);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+				sb.append("\r\n");
+			}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			String uri = req.getRequestURI();
-			StringTokenizer st = new StringTokenizer(uri, "/");
-			st.nextToken();
-			String url = st.nextToken().trim();
-			resp.sendRedirect("/exportResultats/" + url);
+			outputStream.write(sb.toString().getBytes());
+			outputStream.flush();
+			outputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

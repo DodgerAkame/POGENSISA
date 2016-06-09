@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>Livre d'or</title>
+<title>Formulaire</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">

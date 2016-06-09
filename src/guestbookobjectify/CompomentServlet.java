@@ -81,6 +81,7 @@ public class CompomentServlet extends HttpServlet {
 						}
 					} else if (qs.getQuestion().equals("text")) {
 						sb.append(req.getParameter("textreponse" + l));
+						sb.append("|");
 					} else {
 						sb.append(req.getParameter("radios" + l));
 						sb.append("|");

@@ -18,7 +18,7 @@
 
 <html>
 <head>
-<title>POGENSISA</title>
+<title>Formulaire - création</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
@@ -99,7 +99,6 @@
 
 				function addQuestion() {
 					var nb = document.getElementById("numberQuestion").value;
-					alert(nb);
 
 					var extra = document.createElement('div');
 					extra.setAttribute("name", "question" + nb);

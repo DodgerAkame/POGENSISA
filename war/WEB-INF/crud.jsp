@@ -16,7 +16,7 @@
 
 <html>
 <head>
-<title>POGENSISA</title>
+<title>Gestion des questions</title>
 <meta charset="utf-8" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
@@ -30,13 +30,15 @@
 	</div>
 
 	<div id="content">
-		<a href="/creation"> creation </a> <a href="/delete">delete </a> <a
-			href="/update">update </a> <br> <br> <input type="file"
+		<a href="/creation"> Ajouter des questions </a> <a href="/delete">Supprimer des questions </a> <a
+			href="/update">Mettre à jour les questions </a> <br> <br> <input type="file"
 			id="fileinput" onchange='openFile(event)' />
 		<form method="post">
 			<div id="output"></div>
 			<br>
+			<br>
 			<input name="option" type="submit" value="Importer" />
+			<br>
 			<br>
 			<input name="option" type="submit" value="Exporter" />
 		</form>
@@ -58,7 +60,6 @@
 				var text = reader.result;
 				var node = document.getElementById('output');
 				node.innerHTML = '<input type="hidden" name="textImport" value="' + text +'" /> ';
-				//console.log(reader.result.substring(0, 200));
 			};
 			reader.readAsText(input.files[0]);
 		};

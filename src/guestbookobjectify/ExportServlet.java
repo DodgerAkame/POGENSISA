@@ -28,6 +28,7 @@ public class ExportServlet extends HttpServlet {
 			StringBuffer sb = new StringBuffer();
 			sb.append("Question;Type de Question;Catégorie de la question; Réponses;.......");
 			sb.append("\r\n");
+			sb.append("\r\n");
 			
 			List<Question> questions = (List<Question>) ofy().load().type(Question.class).list();
 			
